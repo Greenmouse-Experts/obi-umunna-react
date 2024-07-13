@@ -113,3 +113,41 @@ p {
   transform: scaleX(1.4) scaleY(1.6);
   opacity: 0;
 }
+
+
+@media screen and (max-width: 1600px) {
+  html {
+    font-size: 90%;
+  }
+}
+@media screen and (max-width: 1024px) {
+  html {
+    font-size: 90%;
+  }
+}
+
+@media screen and (max-width: 850px) {
+  html {
+    font-size: 85%;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  html {
+    font-size: 80%;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  html {
+    font-size: 75%;
+  }
+
+  .h2 {
+    font-size: 2rem;
+  }
+
+  p {
+    font-size: 1rem;
+  }
+}

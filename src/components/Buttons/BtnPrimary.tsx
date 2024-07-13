@@ -3,7 +3,7 @@ import { MdArrowOutward } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 
 interface IBtn {
-  color: string;
+  color?: string;
   link: string;
   icon?: boolean;
   children: ReactNode;
