@@ -1,10 +1,13 @@
+import AboutUs from "../components/Home/AboutUs"
+import Banner from "../components/Home/Banner"
 
 
 const Home = () => {
   return (
-    <div>
-        <h1 className='text-red-700'>Home</h1>
-    </div>
+  <>
+  <Banner/>
+  <AboutUs/>
+  </>
   )
 }
 
