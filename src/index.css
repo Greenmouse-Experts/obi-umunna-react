@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css2?family=Sora:wght@100..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,11 +11,103 @@
   box-sizing: border-box;
 }
 
-section,footer {
+section,
+footer {
   padding-left: 8%;
   padding-right: 8%;
 }
-section{
+section {
   padding-top: 4rem;
   padding-bottom: 4rem;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Sore", sans-serif;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+
+p,
+button,
+input,
+select,
+textarea,
+span,
+a {
+  font-family: "Montserrat", sans-serif;
+}
+
+h3 {
+  font-family: "Sore", sans-serif;
+  font-size: 2.5rem;
+  line-height: 3rem;
+  font-weight: 600;
+}
+h4{
+  font-family: "Sore", sans-serif;
+  font-size: 2rem;
+  line-height: 3rem;
+  font-weight: 600; 
+}
+
+p {
+  font-size: 1.12rem;
+  line-height: 2rem;
+}
+
+@media screen and (min-width: 1280px) {
+  .unset {
+    position: unset;
+  }
+  .scroll {
+    overflow-y: unset;
+  }
+}
+
+.btn,
+.btn:link,
+.btn:visited {
+  text-decoration: none;
+  /* display: inline-block; */
+  transition: all 0.2s;
+  position: relative;
+  transition: all 0.3s;
+  border: none;
+  cursor: pointer;
+  text-wrap: nowrap;
+  box-shadow: 0px 4px 5.3px 0px #00000040;
+}
+
+.btn-green:hover {
+  transform: translateY(-0.3rem);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.212);
+}
+
+.btn-green:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
+}
+.btn-green::after {
+  display: inline-block;
+  content: "";
+  height: 100%;
+  width: 100%;
+  border-radius: 0.75rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all 0.4s;
+}
+
+.btn-green::after {
+  background-color: #2708a5;
+}
+.btn-green:hover::after {
+  transform: scaleX(1.4) scaleY(1.6);
+  opacity: 0;
 }
