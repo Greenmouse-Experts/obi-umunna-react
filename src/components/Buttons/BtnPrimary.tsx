@@ -9,7 +9,7 @@ interface IBtn {
   children: ReactNode;
 }
 
-function BtnPrimary({ color, link, icon, children }: IBtn) {
+function BtnPrimary({  link, icon, children }: IBtn) {
   return (
     <NavLink
       to={link}

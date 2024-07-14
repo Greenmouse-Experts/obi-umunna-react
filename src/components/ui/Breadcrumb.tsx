@@ -13,7 +13,7 @@ export default function Breadcrumb({
 }: BreadcrumbProps) {
   return (
     <section
-      className=" relative text-white bg-cover bg-bottom bg-no-repeat sm:px-20 py-24 lg:px-32 2xl:px-40   md:h-[300px]"
+      className=" relative text-white bg-cover bg-bottom bg-no-repeat sm:px-20 py-24 lg:px-32 2xl:px-40  md:h-[250px] 2xl:h-[300px]"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <h1 className="text-4xl font-bold">{breadcrumbText}</h1>
