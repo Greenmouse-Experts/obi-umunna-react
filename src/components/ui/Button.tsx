@@ -12,7 +12,7 @@ const Button: React.FC<ButtonProps> = ({ text, isActive, onClick, target }) => {
     <button
       className={`py-3 px-2 md:px-8 rounded-md border-b-4 border-[#A4744966] ${
         isActive ? "bg-[#2708A5] text-white" : " text-black"
-      } hover:bg-blue-600 hover:text-white transition-colors duration-300`}
+      } hover:bg-[#2708A5] hover:text-white transition-colors duration-300`}
       onClick={onClick}
       data-target={target}
     >
