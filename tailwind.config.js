@@ -5,7 +5,8 @@ export default {
     extend: {
       colors:{
         colorPrimary:"#2708A5",
-        greenPrimary:"#0B6F4F"
+        greenPrimary:"#0B6F4F",
+        
       }
       // backgroundImage: {
       //   "about-us": "url('./src/data/img/aboutus.png')",

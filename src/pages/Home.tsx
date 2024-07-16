@@ -1,5 +1,8 @@
 import AboutUs from "../components/Home/AboutUs"
 import Banner from "../components/Home/Banner"
+import Donate from "../components/Home/Donate"
+import HomeForm from "../components/Home/HomeForm"
+import Programs from "../components/Home/Program"
 
 
 const Home = () => {
@@ -7,6 +10,9 @@ const Home = () => {
   <>
   <Banner/>
   <AboutUs/>
+  <Donate/>
+  <Programs/>
+  <HomeForm/>
   </>
   )
 }

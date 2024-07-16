@@ -6,14 +6,17 @@ import imageBox1 from "../../data/img/Vector.png";
 export default function TrackingPoverty() {
   return (
     <section
-      className=" flex flex-col md:flex-row bg-cover  gap-16 text-white bg-center bg-no-repeat sm:px-20 py-24 lg:px-32 2xl:px-40 min-h-[300px]  md:min-h-[300px]"
+      className=" flex flex-col md:flex-row bg-cover  gap-16 text-white bg-center bg-no-repeat  py-24  min-h-[300px]  md:min-h-[300px]"
       style={{ backgroundImage: `url(${aboutPageImage})` }}
     >
+       <div className="w-[40%]">
+
       <Form />
+       </div>
 
 
       
-      <div className="flex flex-col w-[60%] ">
+      <div className="flex flex-col w-[50%] ">
         <h4>
           We Have Been Tackling Poverty In Communities To Build Better Lives
         </h4>

@@ -18,7 +18,7 @@ function Header() {
   console.log(open1, menu);
   return (
     <header className="relative w-full text-lg font-montserrat">
-      <div className="flex 2xl:px-[7%] px-[1%] py-2  justify-between  items-center font-medium">
+      <div className="flex xl:px-[5%] px-[1%] py-2  justify-between  items-center font-medium">
         <NavLink to="/" className="-ml-16 scale-50 lg:scale-75 lg:ml-0">
           <img src="/logo.svg" alt="logo" />
         </NavLink>
