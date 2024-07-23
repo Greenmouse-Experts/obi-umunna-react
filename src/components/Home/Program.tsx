@@ -1,34 +1,39 @@
-import { IoArrowForwardCircleOutline } from "react-icons/io5";
+
 import ProgramItem from "../ui/ProgramItem";
+import { usePrograms } from "../../service/useProgram";
+import { ProgramType } from "../types/program.types";
+import BtnPrimary from "../Buttons/BtnPrimary";
 
 const Programs = () => {
+  const {programs} = usePrograms()
+
+  console.log(programs)
+
+
   return (
     <section>
       <div className="flex justify-between  items-center lg:flex-row flex-col ">
-        <div className="lg:w-[30%] w-full">
-          <p className="text-xl font-semibold">Latest Programs</p>
-          <h4 className=" font-semibold font-syne mt-3 ">
-            Explore Our Programs
-          </h4>
+        <div className=" w-full">
+       
+          <h3 className=" mt-3 ">
+          Our Featured Causes
+          </h3>
         </div>
 
-        <div className="lg:w-[60%] w-full pl-5 border-l-[4px] border-[#0B6E4F]">
-          <p>
-            Explore our cases with a purpose, knowing that your choice not only
-            protects your device but also extends a helping hand to those in
-            need.
-          </p>
+        <div className="">
+        <BtnPrimary link="">
+        View All Causes
+          
+        </BtnPrimary>
         </div>
       </div>
-      <div className="grid grid-cols-3 gap-x-8 mt-20 ">
-        <ProgramItem />
-        <ProgramItem />
-        <ProgramItem />
+      <div className="grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-8 mt-14 ">
+        {programs?.map((program:ProgramType) => (
+          <ProgramItem key={program.id} program={program} />
+        ))}
+      
       </div>
 
-      <div className=" text-center mt-10 w-full ">
-        <p className=" flex items-center justify-center gap-2 cursor-pointer">Give a helping hand ? <span className=" text-colorPrimary underline ">View All Cause</span> <span><IoArrowForwardCircleOutline color="#2708A5" size={20} /></span></p>
-      </div>
     </section>
   );
 };

@@ -1,57 +1,51 @@
-import Form from "../ui/Form";
-import aboutPageImage from "../../data/img/aboutpage2.png";
-import imageBox1 from "../../data/img/Vector.png";
-
-
 export default function TrackingPoverty() {
   return (
-    <section
-      className=" flex flex-col md:flex-row bg-cover  gap-16 text-white bg-center bg-no-repeat  py-24  min-h-[300px]  md:min-h-[300px]"
-      style={{ backgroundImage: `url(${aboutPageImage})` }}
-    >
-       <div className="w-[40%]">
-
-      <Form />
-       </div>
-
-
-      
-      <div className="flex flex-col w-[50%] ">
-        <h4>
-          We Have Been Tackling Poverty In Communities To Build Better Lives
-        </h4>
-
-        <div className="grid grid-cols-1 gap-4 px-4 py-4 xl:grid-cols-2">
-          <div className="">
-            <img src={imageBox1} alt="About Us Hands" className="w-8" />
-            <h5>Pure Water</h5>
-            <p>
-              Pure water is the essence of life, a precious resource essential
-              for our well-being and the health of our planet.
+    <section className="">
+      <div className="grid grid-cols-3 gap-10">
+        <div className="border-4 border-greenPrimary px-6 py-8 flex gap-3 relative overflow-hidden">
+          <div className="bg-greenPrimary rounded-full p-4 w-fit mb-2 absolute -top-4 -right-4 border border-bluePrimary">
+            <img src="/icons/mission.svg" alt="" className="h-16 w-16 " />
+          </div>
+          <div className="pt-5">
+            <h6>Become a Sponsor</h6>
+            <p className="mt-3">
+              Our mission is the heartbeat of our existence, the guiding star
+              that illuminates our path. It embodies our purpose, our values,
+              and our aspirations. With unwavering dedication, we strive to make
+              a meaningful impact, to inspire positive change, and to leave a
+              lasting legacy.
             </p>
           </div>
-          <div className="">
-            <img src={imageBox1} alt="About Us Hands" className="w-8" />
-            <h5>Pure Water</h5>
-            <p>
-              Pure water is the essence of life, a precious resource essential
-              for our well-being and the health of our planet.
+        </div>
+
+        <div className="border-4 border-[#2708A5] px-6 py-8 flex gap-3 relative overflow-hidden">
+          <div className="bg-[#2708A5] rounded-full p-4 w-fit mb-2 absolute -top-4 -right-4 border border-bluePrimary">
+            <img src="/icons/vision.svg" alt="" className="h-16 w-16 " />
+          </div>
+          <div className="pt-5">
+            <h6>Our Vision</h6>
+            <p className="mt-3">
+              Our vision is the heartbeat of our existence, the guiding star
+              that illuminates our path. It embodies our purpose, our values,
+              and our aspirations. With unwavering dedication, we strive to make
+              a meaningful impact, to inspire positive change, and to leave a
+              lasting legacy.
             </p>
           </div>
-          <div className="">
-            <img src={imageBox1} alt="About Us Hands" className="w-8" />
-            <h5>Pure Water</h5>
-            <p>
-              Pure water is the essence of life, a precious resource essential
-              for our well-being and the health of our planet.
-            </p>
+        </div>
+
+        <div className="border-4 border-[#A47449] px-6 py-8 flex gap-3 relative overflow-hidden">
+          <div className="bg-[#A47449] rounded-full p-4 w-fit mb-2 absolute -top-4 -right-4 border border-bluePrimary">
+            <img src="/icons/impact.svg" alt="" className="h-16 w-16 " />
           </div>
-          <div className="">
-            <img src={imageBox1} alt="About Us Hands" className="w-8" />
-            <h5>Pure Water</h5>
-            <p>
-              Pure water is the essence of life, a precious resource essential
-              for our well-being and the health of our planet.
+          <div className="pt-5">
+            <h6>Our Impact</h6>
+            <p className="mt-3">
+              Our Impact is the heartbeat of our existence, the guiding star
+              that illuminates our path. It embodies our purpose, our values,
+              and our aspirations. With unwavering dedication, we strive to make
+              a meaningful impact, to inspire positive change, and to leave a
+              lasting legacy.
             </p>
           </div>
         </div>

@@ -17,7 +17,7 @@ function BtnPrimary({  link, icon, children }: IBtn) {
         
            bg-colorPrimary btn-green text-white
         
-       w-fit mt-10 px-10 py-3 font-medium btn  rounded-xl transition-all text-lg flex items-center gap-3`}
+       w-fit  font-medium btn  transition-all text-lg flex items-center gap-3`}
     >
       {children}
       {icon && (

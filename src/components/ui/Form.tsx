@@ -1,12 +1,43 @@
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-nocheck
 import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-ignore
 import NaijaStates from "naija-state-local-government";
 import InputText from "./Input";
 import SelectInput from "./Select";
 
 export default function Form() {
-  const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm();
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      full_name: "",
+      email: "",
+      profile_picture: null,
+      phone: "",
+      gender: "",
+      residentialAddress: "",
+      lga: "",
+      state: "",
+      country: "",
+      levelOfEducation: "",
+      educationCertificate: null,
+      meansOfIdentification: "",
+      uploadIdentification: null,
+      nextOfKin: "",
+      nextOfKinPhone: "",
+      nextOfKinEmail: "",
+      nextOfKinAddress: "",
+      password: "",
+    },
+  });
   const [selectedState, setSelectedState] = useState("");
   const watchState = watch("state");
 
@@ -21,11 +52,22 @@ export default function Form() {
     // Add your form submission logic here, e.g., sending data to an API
   };
 
+  const handleFileChange = (e, fieldName) => {
+    const file = e.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setValue(fieldName, reader.result, { shouldValidate: true });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   return (
     <div className="apply-left-div text-black bg-gray-100 shadow-lg p-5 rounded-lg max-w-[1000px] mx-auto">
       <h6 className="mb-4">Apply as Apprentice</h6>
       <div className="apply-container mx-auto overflow-x-hidden max-w-[900px] rounded-lg overflow-y-auto h-[400px] pr-4">
-        <form 
+        <form
           onSubmit={handleSubmit(onSubmit)}
           className="grid grid-cols-1 gap-8 p-4 md:grid-cols-2 items-end"
         >
@@ -41,20 +83,66 @@ export default function Form() {
           />
           <div className="flex flex-col">
             <label
-              htmlFor="profile-picture"
+              htmlFor="profile_picture"
               className="mb-1 text-sm font-medium"
             >
-              Profile Picture
+              Photo
             </label>
             <input
               type="file"
               id="profile_picture"
               accept="image/*"
-              {...register("profile_picture", { required: "Profile Picture is required" })}
+              onChange={(e) => handleFileChange(e, "profile_picture")}
               className="w-full p-2 bg-white border border-gray-300 rounded-lg"
             />
-            {errors.profile_picture && <span className="text-red-500 text-sm">{errors.profile_picture.message}</span>}
+            {errors.profile_picture && (
+              <span className="text-red-500 text-sm">
+                {errors.profile_picture.message}
+              </span>
+            )}
           </div>
+          <InputText
+            id="email"
+            textLabel="Email"
+            type="email"
+            setValue={(value) => setValue("email", value)}
+            value={watch("email")}
+            placeholder="Enter your email"
+            error={errors.email?.message}
+            {...register("email", { required: "Email is required" })}
+          />
+          <InputText
+            id="phone"
+            textLabel="Phone Number"
+            type="tel"
+            setValue={(value) => setValue("phone", value)}
+            value={watch("phone")}
+            placeholder="Enter your phone number"
+            error={errors.phone?.message}
+            {...register("phone", {
+              required: "Phone Number is required",
+            })}
+          />
+          <SelectInput
+            id="gender"
+            label="Gender"
+            items={["Male", "Female"]}
+            handleChange={(e) => setValue("gender", e.target.value)}
+            value={watch("gender")}
+            placeholder="Select your gender"
+            error={errors.gender?.message}
+            {...register("gender", { required: "Gender is required" })}
+          />
+          <InputText
+            id="residentialAddress"
+            textLabel="Residential Address"
+            type="text"
+            setValue={(value) => setValue("residentialAddress", value)}
+            value={watch("residentialAddress")}
+            placeholder="Enter your residential address"
+            error={errors.residentialAddress?.message}
+            {...register("residentialAddress", { required: "Residential Address is required" })}
+          />
           <SelectInput
             id="country"
             label="Country"
@@ -85,85 +173,122 @@ export default function Form() {
             error={errors.lga?.message}
             {...register("lga", { required: "LGA is required" })}
           />
-          <InputText
-            id="phone_number"
-            textLabel="Phone Number"
-            type="tel"
-            setValue={(value) => setValue("phone_number", value)}
-            value={watch("phone_number")}
-            placeholder="Enter your phone number"
-            error={errors.phone_number?.message}
-            {...register("phone_number", { required: "Phone Number is required" })}
-          />
-          <InputText
-            id="whatsapp_number"
-            textLabel="WhatsApp Number (Optional)"
-            type="tel"
-            setValue={(value) => setValue("whatsapp_number", value)}
-            value={watch("whatsapp_number")}
-            placeholder="Enter your WhatsApp number"
-            error={errors.whatsapp_number?.message}
-            {...register("whatsapp_number")}
-          />
-          <InputText
-            id="email"
-            textLabel="Email"
-            type="email"
-            setValue={(value) => setValue("email", value)}
-            value={watch("email")}
-            placeholder="Enter your email"
-            error={errors.email?.message}
-            {...register("email", { required: "Email is required" })}
-          />
-          <InputText
-            id="id"
-            textLabel="ID (NIN or international Passport)"
-            type="text"
-            setValue={(value) => setValue("id", value)}
-            value={watch("id")}
-            placeholder="Enter your ID (NIN or international Passport)"
-            error={errors.id?.message}
-            {...register("id", { required: "ID is required" })}
-          />
-          <InputText
-            id="address"
-            textLabel="Home Address"
-            type="text"
-            setValue={(value) => setValue("address", value)}
-            value={watch("address")}
-            placeholder="Enter your home address"
-            error={errors.address?.message}
-            {...register("address", { required: "Home Address is required" })}
-          />
-          <InputText
-            id="occupation"
-            textLabel="Occupation"
-            type="text"
-            setValue={(value) => setValue("occupation", value)}
-            value={watch("occupation")}
-            placeholder="Enter your occupation"
-            error={errors.occupation?.message}
-            {...register("occupation", { required: "Occupation is required" })}
-          />
           <SelectInput
-            id="skill"
-            label="Type of skill you want to learn"
-            items={["Skill 1", "Skill 2", "Skill 3", "Skill 4", "Skill 5"]}
-            handleChange={(e) => setValue("skill", e.target.value)}
-            value={watch("skill")}
-            placeholder="Select the skill you want to learn"
-            error={errors.skill?.message}
-            {...register("skill", { required: "Skill is required" })}
+            id="levelOfEducation"
+            label="Level of Education"
+            items={["Primary", "Secondary", "Tertiary"]}
+            handleChange={(e) => setValue("levelOfEducation", e.target.value)}
+            value={watch("levelOfEducation")}
+            placeholder="Select your level of education"
+            error={errors.levelOfEducation?.message}
+            {...register("levelOfEducation", { required: "Level of Education is required" })}
           />
-        
-          <div className="flex w-full grid-cols-2">
-              <button
-                type="submit"
-                className="w-full px-4 py-2 font-semibold text-white transition-colors bg-[#2708A5] rounded-md hover:bg-blue-600"
-              >
-                Submit
-              </button>
-            </div>
+          <div className="flex flex-col">
+            <label
+              htmlFor="educationCertificate"
+              className="mb-1 text-sm font-medium"
+            >
+              Education Certificate
+            </label>
+            <input
+              type="file"
+              id="educationCertificate"
+              accept="image/*"
+              onChange={(e) => handleFileChange(e, "educationCertificate")}
+              className="w-full p-2 bg-white border border-gray-300 rounded-lg"
+            />
+            {errors.educationCertificate && (
+              <span className="text-red-500 text-sm">
+                {errors.educationCertificate.message}
+              </span>
+            )}
+          </div>
+          <SelectInput
+            id="meansOfIdentification"
+            label="Means of Identification"
+            items={["NIN", "Voters card", "Drivers Licence"]}
+            handleChange={(e) => setValue("meansOfIdentification", e.target.value)}
+            value={watch("meansOfIdentification")}
+            placeholder="Select your means of identification"
+            error={errors.meansOfIdentification?.message}
+            {...register("meansOfIdentification", { required: "Means of Identification is required" })}
+          />
+          <div className="flex flex-col">
+            <label
+              htmlFor="uploadIdentification"
+              className="mb-1 text-sm font-medium"
+            >
+              Upload Identification
+            </label>
+            <input
+              type="file"
+              id="uploadIdentification"
+              accept="image/*"
+              onChange={(e) => handleFileChange(e, "uploadIdentification")}
+              className="w-full p-2 bg-white border border-gray-300 rounded-lg"
+            />
+            {errors.uploadIdentification && (
+              <span className="text-red-500 text-sm">
+                {errors.uploadIdentification.message}
+              </span>
+            )}
+          </div>
+          <InputText
+            id="nextOfKin"
+            textLabel="Next of Kin"
+            type="text"
+            setValue={(value) => setValue("nextOfKin", value)}
+            value={watch("nextOfKin")}
+            placeholder="Enter next of kin name"
+            error={errors.nextOfKin?.message}
+            {...register("nextOfKin", { required: "Next of Kin is required" })}
+          />
+          <InputText
+            id="nextOfKinPhone"
+            textLabel="Next of Kin Phone"
+            type="tel"
+            setValue={(value) => setValue("nextOfKinPhone", value)}
+            value={watch("nextOfKinPhone")}
+            placeholder="Enter next of kin phone number"
+            error={errors.nextOfKinPhone?.message}
+            {...register("nextOfKinPhone", { required: "Next of Kin Phone is required" })}
+          />
+          <InputText
+            id="nextOfKinEmail"
+            textLabel="Next of Kin Email"
+            type="email"
+            setValue={(value) => setValue("nextOfKinEmail", value)}
+            value={watch("nextOfKinEmail")}
+            placeholder="Enter next of kin email"
+            error={errors.nextOfKinEmail?.message}
+            {...register("nextOfKinEmail", { required: "Next of Kin Email is required" })}
+          />
+          <InputText
+            id="nextOfKinAddress"
+            textLabel="Next of Kin Address"
+            type="text"
+            setValue={(value) => setValue("nextOfKinAddress", value)}
+            value={watch("nextOfKinAddress")}
+            placeholder="Enter next of kin address"
+            error={errors.nextOfKinAddress?.message}
+            {...register("nextOfKinAddress", { required: "Next of Kin Address is required" })}
+          />
+          <InputText
+            id="password"
+            textLabel="Password"
+            type="password"
+            setValue={(value) => setValue("password", value)}
+            value={watch("password")}
+            placeholder="Enter your password"
+            error={errors.password?.message}
+            {...register("password", { required: "Password is required" })}
+          />
+          <button
+            type="submit"
+            className="px-4 py-2 mt-4 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors duration-200"
+          >
+            Submit
+          </button>
         </form>
       </div>
     </div>

@@ -1,12 +1,13 @@
 import { ReactNode } from "react";
 
 interface IBtnCta {
-    children: ReactNode
+    children: ReactNode;
+    outline?:boolean
 }
 
-const BtnCta = ({ children }: IBtnCta) => {
+const BtnCta = ({ children,outline }: IBtnCta) => {
   return (
-    <button className="  bg-colorPrimary btn-green text-white w-fit  px-10 py-2 font-medium btn  rounded-xl transition-all text-base flex items-center gap-3">
+    <button className={`${outline ? "border-2 border-colorPrimary text-black" :"text-white bg-colorPrimary "} btn-green  w-fit  !px-8 !py-1 font-medium btn  rounded-xl transition-all text-base flex items-center gap-3`}>
       {children}
     </button>
   );

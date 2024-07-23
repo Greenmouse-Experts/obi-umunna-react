@@ -1,28 +1,51 @@
-import BtnPrimary from "../Buttons/BtnPrimary";
+import { FaCircleArrowRight } from "react-icons/fa6";
 
 const Donate = () => {
   return (
-    <section className="grid grid-cols-2 items-center bg-[url('/img/donate-bg.png')] text-white">
-      <div className=" w-full">
-        <p className="text-xl font-semibold">Donate</p>
-        <h4 className=" font-semibold font-syne mt-5 ">
-          We Have Helped Over 200 Vulnerable Communities
-        </h4>
-        <p className=" mt-5">
-          With your continued support, we'll reach even more communities,
-          leaving a lasting legacy of compassion and change.
-        </p>
-
-        <div></div>
-        <div>
-          <BtnPrimary link="" color="">
-            Donate Now
-          </BtnPrimary>
+    <section className="">
+      <div className="grid grid-cols-3 gap-10">
+        <div className="bg-[#E9F6F2] px-3 py-8 flex gap-3 rounded-[10px] relative">
+          <div className="bg-greenPrimary rounded-md py-2 px-6 place-content-center">
+            <img src="/img/volunteer.png" alt="" />
+          </div>
+          <div>
+            <h6>Become a Sponsor</h6>
+            <p className="mt-3">
+              The foundation stone of this Great body was laid in Stuttgart on
+            </p>
+          </div>
+          <FaCircleArrowRight
+            className="absolute bottom-4 right-4"
+            size={25}
+            color="#0B6F4F"
+          />
         </div>
-      </div>
 
-      <div className="relative h-full">
-        <img src="/img/donate.png" alt=" " className="  2xl:scale-75 scale-[0.6] absolute top-1/2 left-[40%] transform -translate-x-1/2 -translate-y-1/2  object-cover object-center" />
+        <div className="bg-[#EAE7F5] px-3 py-8 flex gap-3 rounded-[10px] relative">
+          <div className=" bg-colorPrimary rounded-md py-2 px-6 place-content-center">
+            <img src="/img/skill.png" alt="" />
+          </div>
+          <div>
+            <h6>Apply For Skill</h6>
+            <p className="mt-3">
+              The foundation stone of this Great body was laid in Stuttgart on
+            </p>
+          </div>
+          <FaCircleArrowRight className="absolute bottom-4 right-4" size={25} color="#2708A5" />
+        </div>
+
+        <div className="bg-[#F8EADE] px-3 py-8 flex gap-3 rounded-[10px] relative">
+          <div className=" bg-[#A4764C] rounded-md py-2 px-6 place-content-center">
+            <img src="/img/youth.png" alt="" />
+          </div>
+          <div>
+            <h6>Youth Empowerment</h6>
+            <p className="mt-3">
+              The foundation stone of this Great body was laid in Stuttgart on
+            </p>
+          </div>
+          <FaCircleArrowRight className="absolute bottom-4 right-4" size={25} color="#A4764C" />
+        </div>
       </div>
     </section>
   );

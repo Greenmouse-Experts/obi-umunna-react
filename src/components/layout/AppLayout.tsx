@@ -13,7 +13,7 @@ function AppLayout() {
   return (
     <>
       <Header />
-      <main className="xl:pt-1">
+      <main className="">
         <Outlet />
       </main>
       <Footer />

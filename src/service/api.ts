@@ -8,11 +8,12 @@ const axiosInstance = axios.create({
 });
 
 export const fetchPrograms = async () => {
-  const response = await axiosInstance.get("/programs"); 
-  return response.data;
+  const response = await axiosInstance.get("/get/programs"); 
+  return response.data.data;
 };
 
-export const apply = async (data) => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const apply = async (data: any) => {
   const response = await axiosInstance.post(`/programs/$`, data);
   return response.data;
 };

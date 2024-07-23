@@ -5,7 +5,9 @@ interface SelectProps {
   items: string[];
   label: string;
   value: string;
-  error: string;
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  error: any;
   handleChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   placeholder: string;
 }
@@ -22,7 +24,7 @@ const SelectInput: React.FC<SelectProps> = React.forwardRef(({
 }, ref) => {
   return (
     <div className="w-full">
-      <label htmlFor={id} className="text-[15px] font-medium text-[#1d2026] tracking-wide">
+      <label htmlFor={id} className="text-sm font-medium text-[#1d2026] tracking-wide">
         {label}
       </label>
       <select
@@ -32,7 +34,7 @@ const SelectInput: React.FC<SelectProps> = React.forwardRef(({
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         //@ts-expect-error
         ref={ref}
-        className="block w-full h-[2.9rem] py-1.5 px-2 text-[14px] text-[#1c2125] border-0 outline-none ring-2 ring-inset ring-[#C3D4E9] placeholder:text-[#8C94A3] focus:ring-2 focus:ring-inset focus:ring-[#0675C1] rounded-md"
+        className="block w-full h-[2.9rem] py-1.5 px-2 text-sm text-[#1c2125] border-0 outline-none ring-2 ring-inset ring-[#C3D4E9] placeholder:text-[#8C94A3] focus:ring-2 focus:ring-inset focus:ring-[#0675C1] rounded-md"
         {...rest}
       >
         <option value="">{placeholder}</option>
