@@ -7,6 +7,8 @@ import Programs from "./pages/Programs";
 import Contact from "./pages/Contact";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
+import Faq from "./pages/Faq";
+import Excos from "./pages/Excos";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,14 @@ const router = createBrowserRouter([
       {
         path: "/contact",
         element: <Contact />,
+      },
+      {
+        path: "/faq",
+        element: <Faq />,
+      },
+      {
+        path: "/excos",
+        element: <Excos />,
       },
     ],
   },

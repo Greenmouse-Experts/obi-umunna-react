@@ -1,21 +1,16 @@
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 //@ts-nocheck
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import InputText from "./Input";
 import SelectInput from "./Select";
 import { useDonate } from "../../service/useApply";
+import PaystackPaymentButton from "./PaystackButton";
+
 
 export default function DonorForm({ programId, handleCloseModal }) {
-  const {donate, isDonating } = useDonate();
-
-  const {
-    register,
-    handleSubmit,
-    watch,
-    setValue,
-    formState: { errors },
-  } = useForm({
+  const { donate, isDonating } = useDonate();
+  const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm({
     defaultValues: {
       amount: "",
       email: "",
@@ -24,13 +19,16 @@ export default function DonorForm({ programId, handleCloseModal }) {
       typeOfSponsorship: "",
       homeAddress: "",
       companyName: "",
-      companyLogo: null,
+      companyLogo: "",
       companyAddress: "",
-     
     },
   });
+
   const [selectedState, setSelectedState] = useState("");
   const [selectedSponsor, setSelectedSponsor] = useState("");
+  const [paystackRef, setPaystackRef] = useState(null);
+  const [formData, setFormData] = useState(null);
+
   const watchState = watch("recognitionPreferences");
   const watchSponsor = watch("typeOfSponsorship");
 
@@ -46,14 +44,23 @@ export default function DonorForm({ programId, handleCloseModal }) {
     }
   }, [watchSponsor]);
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const handleFormSubmit = (data) => {
+    console.log("Form data:", data); // Debug log
+    setFormData(data);
+  };
 
+  const handlePaymentSuccess = (reference) => {
+    console.log("Payment successful, reference:", reference, paystackRef); // Debug log
+    setPaystackRef(reference);
     donate(
-      { ...data, programId },
+      { ...formData, programId, refId: reference },
       {
         onSuccess: () => {
+          console.log("Donation successful"); // Debug log
           handleCloseModal();
+        },
+        onError: (error) => {
+          console.error("Donation error:", error); // Debug log
         },
       }
     );
@@ -71,10 +78,9 @@ export default function DonorForm({ programId, handleCloseModal }) {
   };
 
   return (
-    <div className="apply-left-div text-black  shadow-lg p-5 rounded-lg max-w-[1000px] mx-auto">
+    <div className="apply-left-div text-black shadow-lg p-5 rounded-lg max-w-[1000px] mx-auto">
       <h6 className="mb-4">Sponsor a Program</h6>
-
-      <form onSubmit={handleSubmit(onSubmit)} className="">
+      <form onSubmit={handleSubmit(handleFormSubmit)} className="">
         <div className="grid grid-cols-1 gap-8 p-4 lg:grid-cols-2 items-end">
           <InputText
             id="amount"
@@ -97,66 +103,35 @@ export default function DonorForm({ programId, handleCloseModal }) {
             error={errors.email?.message}
             {...register("email", { required: "Email is required" })}
           />
+
           <SelectInput
             id="recognitionPreferences"
             label="Recognition Preferences"
             items={["Anonymous", "Public acknowledgment"]}
-            handleChange={(e) =>
-              setValue("recognitionPreferences", e.target.value)
-            }
+            handleChange={(e) => setValue("recognitionPreferences", e.target.value)}
             value={watch("recognitionPreferences")}
             placeholder="Select recognitionPreferences"
             error={errors.recognitionPreferences?.message}
             {...register("recognitionPreferences", {
-              required: "recognitionPreferences is required",
+              required: "Recognition Preferences is required",
             })}
           />
         </div>
+
         {selectedState === "Public acknowledgment" && (
           <div className="grid grid-cols-1 gap-8 p-4 lg:grid-cols-2 items-end">
-            {" "}
             <InputText
               id="fullName"
               textLabel="Full Name"
               type="text"
               setValue={(value) => setValue("fullName", value)}
               value={watch("fullName")}
-              placeholder="Enter your full fullName"
+              placeholder="Enter your full name"
               error={errors.fullName?.message}
               {...register("fullName", { required: "Full Name is required" })}
             />
-            <InputText
-              id="companyName"
-              textLabel="Company Name"
-              type="text"
-              setValue={(value) => setValue("companyName", value)}
-              value={watch("companyName")}
-              placeholder="Enter your residential address"
-              error={errors.companyName?.message}
-              {...register("companyName", {
-                required: "Company Name is required",
-              })}
-            />
-            <SelectInput
-              id="typeOfSponsorship"
-              label="Type of Sponsorship"
-              items={["Corporate", "Individual"]}
-              handleChange={(e) =>
-                setValue("typeOfSponsorship", e.target.value)
-              }
-              value={watch("typeOfSponsorship")}
-              placeholder="Select typeOfSponsorship type"
-              error={errors.typeOfSponsorship?.message}
-              {...register("typeOfSponsorship", {
-                required: "sponsorShip is required",
-              })}
-            />
-          </div>
-        )}
 
-        {selectedSponsor === "Corporate" && selectedState === "Public acknowledgment" && (
-          <div className="grid grid-cols-1 gap-8 p-4 lg:grid-cols-2 items-end">
-           <InputText
+            <InputText
               id="homeAddress"
               textLabel="Home Address"
               type="text"
@@ -164,10 +139,35 @@ export default function DonorForm({ programId, handleCloseModal }) {
               value={watch("homeAddress")}
               placeholder="Enter your residential address"
               error={errors.homeAddress?.message}
-              {...register("homeAddress", {
-                required: "Residential Address is required",
-              })}
+              {...register("homeAddress", { required: "Residential Address is required" })}
             />
+
+            <SelectInput
+              id="typeOfSponsorship"
+              label="Type of Sponsorship"
+              items={["Corporate", "Individual"]}
+              handleChange={(e) => setValue("typeOfSponsorship", e.target.value)}
+              value={watch("typeOfSponsorship")}
+              placeholder="Select type of sponsorship"
+              error={errors.typeOfSponsorship?.message}
+              {...register("typeOfSponsorship", { required: "Type of Sponsorship is required" })}
+            />
+          </div>
+        )}
+
+        {selectedSponsor === "Corporate" && selectedState === "Public acknowledgment" && (
+          <div className="grid grid-cols-1 gap-8 p-4 lg:grid-cols-2 items-end">
+            <InputText
+              id="companyName"
+              textLabel="Company Name"
+              type="text"
+              setValue={(value) => setValue("companyName", value)}
+              value={watch("companyName")}
+              placeholder="Enter company name"
+              error={errors.companyName?.message}
+              {...register("companyName", { required: "Company Name is required" })}
+            />
+
             <div className="flex flex-col">
               <label htmlFor="companyLogo" className="mb-1 text-sm font-medium">
                 Company Logo
@@ -177,12 +177,10 @@ export default function DonorForm({ programId, handleCloseModal }) {
                 id="companyLogo"
                 accept="image/*"
                 onChange={(e) => handleFileChange(e, "companyLogo")}
-                className="w-full py-3 px-4 h-16 outline-none  bg-[#F4F4F4] rounded-md text-sm"
+                className="w-full py-3 px-4 h-16 outline-none bg-[#F4F4F4] rounded-md text-sm"
               />
               {errors.companyLogo && (
-                <span className="text-red-500 text-sm">
-                  {errors.companyLogo.message}
-                </span>
+                <span className="text-red-500 text-sm">{errors.companyLogo.message}</span>
               )}
             </div>
 
@@ -192,22 +190,29 @@ export default function DonorForm({ programId, handleCloseModal }) {
               type="text"
               setValue={(value) => setValue("companyAddress", value)}
               value={watch("companyAddress")}
-              placeholder="Enter next of kin name"
+              placeholder="Enter company address"
               error={errors.companyAddress?.message}
-              {...register("companyAddress", {
-                required: "Next of Kin is required",
-              })}
+              {...register("companyAddress", { required: "Company Address is required" })}
             />
           </div>
         )}
 
-        <button
-          type="submit"
-          className="px-8 py-2 mt-4 bg-colorPrimary text-white rounded hover:bg-blue-600 transition-colors duration-200"
-          disabled={isDonating}
-        >
-          {isDonating ? "Submitting..." : "Submit"}
-        </button>
+        {!formData && !isDonating ? (
+          <button
+            type="submit"
+            className="px-8 py-2 mt-4 bg-colorPrimary text-white rounded hover:bg-blue-600 transition-colors duration-200"
+            disabled={isDonating}
+          >
+            {isDonating ? "Submitting..." : "Proceed to Payment"}
+          </button>
+        ) : (
+          <PaystackPaymentButton
+            email={watch("email")}
+            amount={watch("amount") * 100} // Amount in kobo
+            onSuccess={handlePaymentSuccess}
+            onClose={() => console.log("Payment closed")}
+          />
+        )}
       </form>
     </div>
   );

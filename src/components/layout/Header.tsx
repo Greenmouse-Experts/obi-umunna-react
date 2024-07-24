@@ -141,8 +141,8 @@ function Header() {
                 </NavLink>
               </li>
               <li className="relative">
-                <NavLink onClick={() => setMenu(false)} className="" to="/">
-                  Resources
+                <NavLink onClick={() => setMenu(false)} className="" to="/faq">
+                  FAQ
                 </NavLink>
               </li>
               <li>
@@ -154,13 +154,13 @@ function Header() {
           </nav>
           <div className="flex items-center gap-4">
             <NavLink
-              to=""
+              to="/programs"
               className="!px-6 py-3 text-sm text-white bg-colorPrimary text-nowrap btn btn-green 2xl:"
             >
               Become a Sponsor
             </NavLink>
             <NavLink
-              to=""
+              to="/programs"
               className="!px-6 py-3 text-sm text-white bg-colorPrimary text-nowrap btn btn-green 2xl:"
             >
               Apply For A skill

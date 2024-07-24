@@ -72,6 +72,13 @@ p {
   line-height: 2rem;
 }
 
+button{
+  background-color: #A47449;
+  color: white;
+  padding: 0.5rem 2rem;
+  border-radius: 5px;
+}
+
 @media screen and (min-width: 1280px) {
   .unset {
     position: unset;
@@ -80,6 +87,8 @@ p {
     overflow-y: unset;
   }
 }
+
+
 
 .btn,
 .btn:link,
