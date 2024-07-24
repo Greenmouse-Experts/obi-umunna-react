@@ -31,8 +31,10 @@ const Banner = () => {
 
   return (
     <>
-      
-        <section className={` bg-[url('/img/hero-${currentSlide}.png')] bg-cover bg-center px-0 py-0   w-full  h-[45rem] overflow-hidden animate__animated  animate__fadeIn animate__delay-3`}>
+      {currentSlide === 1 && (
+        <section
+          className={` hero-1 bg-cover bg-center px-0 py-0   w-full  h-[45rem] overflow-hidden `}
+        >
           <div className=" px-[7%] h-full">
             <div className="  flex flex-col h-full    justify-center  pt-28 lg:w-[50%] w-full animate__animated  animate__fadeIn animate__delay-3">
               <p className=" uppercase tracking-widest text-white">
@@ -54,9 +56,10 @@ const Banner = () => {
             </div>
           </div>
         </section>
-      
-        {/* {currentSlide === 2 && (
-        <section className=" bg-[url('/img/hero-2.png')] bg-cover bg-center px-0 py-0   w-full  h-[45rem] overflow-hidden animate__animated  animate__fadeIn animate__delay-3">
+      )}
+
+      {currentSlide === 2 && (
+        <section className=" hero-2 bg-cover bg-center px-0 py-0   w-full  h-[45rem] overflow-hidden ">
           <div className=" px-[7%] h-full">
             <div className="  flex flex-col h-full    justify-center  pt-28 lg:w-[50%] w-full animate__animated  animate__fadeIn animate__delay-3">
               <p className=" uppercase tracking-widest text-white">
@@ -80,7 +83,7 @@ const Banner = () => {
         </section>
       )}
         {currentSlide === 3 && (
-        <section className=" bg-[url('/img/hero-3.png')] bg-cover bg-center px-0 py-0   w-full  h-[45rem] overflow-hidden animate__animated  animate__fadeIn animate__delay-3">
+        <section className=" hero-3 bg-cover bg-center px-0 py-0   w-full  h-[45rem] overflow-hidden">
           <div className=" px-[7%] h-full">
             <div className="  flex flex-col h-full    justify-center  pt-28 lg:w-[50%] w-full animate__animated  animate__fadeIn animate__delay-3">
               <p className=" uppercase tracking-widest text-white">
@@ -104,7 +107,7 @@ const Banner = () => {
         </section>
       )}
         {currentSlide === 4 && (
-        <section className=" bg-[url('/img/hero-4.png')] bg-cover bg-center px-0 py-0   w-full  h-[45rem] overflow-hidden animate__animated  animate__fadeIn animate__delay-3">
+        <section className=" hero-4 bg-cover bg-center px-0 py-0   w-full  h-[45rem] overflow-hidden ">
           <div className=" px-[7%] h-full">
             <div className="  flex flex-col h-full    justify-center  pt-28 lg:w-[50%] w-full animate__animated  animate__fadeIn animate__delay-3">
               <p className=" uppercase tracking-widest text-white">
@@ -126,7 +129,7 @@ const Banner = () => {
             </div>
           </div>
         </section>
-      )} */}
+      )}
     </>
   );
 };

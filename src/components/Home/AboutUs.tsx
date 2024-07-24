@@ -4,7 +4,7 @@ import BtnPrimary from "../Buttons/BtnPrimary";
 const AboutUs = () => {
   return (
     <section>
-      <div className="flex lg:flex-row flex-col  items-center justify-between">
+      <div className="flex lg:flex-row flex-col gap-10  items-center justify-between">
         <div className="lg:w-[50%] w-full">
           <p className=" uppercase font-semibold text-greenPrimary">About Us</p>
           <h3 className=" font-semibold font-syne text-black">

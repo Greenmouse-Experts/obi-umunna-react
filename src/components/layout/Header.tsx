@@ -38,11 +38,11 @@ function Header() {
         </NavLink>
         <div
           className={`flex md:flex xl:flex-row md:px-0 md:py-0 flex-col 2xl:gap-[53px] fixed z-40 w-[24rem] h-screen xl:w-fit xl:h-auto md:items-center py-5 gap-[25px] px-5 ${
-            menu ? "left-0 top-[8rem] bg-white" : "left-[-1000px] top-[8rem]"
+            menu ? "left-0 top-[0rem] bg-white" : "left-[-1000px] top-[0rem]"
           } left-0 unset transition-all`}
         >
-          <nav className="w-full scroll lg:text-[1rem] text-white">
-            <ul className="flex-col items-start gap-5 pt-3 pl-10 md:flex xl:flex-row xl:gap-14 xl:items-center xl:pt-0 xl:pl-0 sm:pl-20">
+          <nav className="w-full scroll lg:text-[1rem] xl:text-white text-black">
+            <ul className="flex flex-col items-start gap-5 pt-3 pl-10 md:flex xl:flex-row xl:gap-14 xl:items-center xl:pt-0 xl:pl-0 sm:pl-20">
               <li className="">
                 <NavLink
                   onClick={() => setMenu(false)}
@@ -110,17 +110,17 @@ function Header() {
                     }`}
                   >
                     <NavLink
-                      className=" py-3 px-1 w-full flex items-center gap-4 text-center text-bluePrimary text-lg font-medium text-nowrap "
+                      className=" py-3 px-1 w-full flex items-center gap-4 text-center text-bluePrimary  font-medium text-nowrap "
                       onClick={() => {
                         setMenu(false);
                       }}
                       to="/about"
                     >
-                      Our History
+                      About Us
                     </NavLink>
                   
                     <NavLink
-                      className=" py-3 px-1 w-full flex items-center gap-4 text-center text-bluePrimary text-lg font-medium text-nowrap"
+                      className=" py-3 px-1 w-full flex items-center gap-4 text-center text-bluePrimary  font-medium text-nowrap"
                       onClick={() => {
                         setMenu(false);
                       }}

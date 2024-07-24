@@ -5,6 +5,8 @@ import About from "./pages/About";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import Programs from "./pages/Programs";
 import Contact from "./pages/Contact";
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from "react-toastify";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +38,7 @@ function App() {
     <>
       <QueryClientProvider client={queryClient}>
         <RouterProvider router={router} />
+        <ToastContainer />
       </QueryClientProvider>
     </>
   );

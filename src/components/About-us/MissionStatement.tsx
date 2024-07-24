@@ -1,9 +1,9 @@
 export default function MissionStatement() {
   return (
     <section>
-      <div className="flex lg:flex-row flex-col  items-center justify-between">
+      <div className="flex lg:flex-row flex-col gap-10  items-center justify-between">
         <div className="lg:w-[35%] w-full">
-          <img src="/img/about-img.png" alt="" className="" />
+          <img src="/img/about-img.png" alt="" className="w-full object-cover " />
         </div>
         <div className="lg:w-[50%] w-full">
           <p className=" uppercase font-semibold text-greenPrimary">About Us</p>

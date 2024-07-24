@@ -14,6 +14,13 @@ export const fetchPrograms = async () => {
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const apply = async (data: any) => {
-  const response = await axiosInstance.post(`/programs/$`, data);
+  const response = await axiosInstance.post(`/applicant`, data);
   return response.data;
 };
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const donate = async (data: any) => {
+  const response = await axiosInstance.post(`/donate`, data);
+  return response.data;
+};
+

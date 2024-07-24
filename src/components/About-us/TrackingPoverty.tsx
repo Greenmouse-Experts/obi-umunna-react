@@ -1,7 +1,7 @@
 export default function TrackingPoverty() {
   return (
     <section className="">
-      <div className="grid grid-cols-3 gap-10">
+      <div className="grid lg:grid-cols-3 grid-cols-1 gap-10">
         <div className="border-4 border-greenPrimary px-6 py-8 flex gap-3 relative overflow-hidden">
           <div className="bg-greenPrimary rounded-full p-4 w-fit mb-2 absolute -top-4 -right-4 border border-bluePrimary">
             <img src="/icons/mission.svg" alt="" className="h-16 w-16 " />

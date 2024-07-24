@@ -12,10 +12,10 @@ const Programs = () => {
 
   return (
     <section>
-      <div className="flex justify-between  items-center lg:flex-row flex-col ">
+      <div className="flex justify-between items-center lg:flex-row flex-col gap-10 ">
         <div className=" w-full">
        
-          <h3 className=" mt-3 ">
+          <h3 className=" mt-3 lg:text-left text-center ">
           Our Featured Causes
           </h3>
         </div>

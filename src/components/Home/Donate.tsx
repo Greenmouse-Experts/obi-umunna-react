@@ -3,7 +3,7 @@ import { FaCircleArrowRight } from "react-icons/fa6";
 const Donate = () => {
   return (
     <section className="">
-      <div className="grid grid-cols-3 gap-10">
+      <div className="grid lg:grid-cols-3 grid-cols-1 gap-10">
         <div className="bg-[#E9F6F2] px-3 py-8 flex gap-3 rounded-[10px] relative">
           <div className="bg-greenPrimary rounded-md py-2 px-6 place-content-center">
             <img src="/img/volunteer.png" alt="" />
