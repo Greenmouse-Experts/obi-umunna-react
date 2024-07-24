@@ -1,11 +1,11 @@
-import Form from "../ui/Form";
+
 
 
 const HomeForm = () => {
   return (
     <section className="bg-[url('/img/form-bg.png')] grid grid-cols-2 justify-between items-center bg-center bg-cover">
       <div className=" xl:pr-[20%]">
-        <Form />
+        {/* <Form /> */}
       </div>
       <div className=" w-full xl:pl-[10%] text-white">
         <p className="text-xl font-semibold">DoGIVE DONATIONnate</p>

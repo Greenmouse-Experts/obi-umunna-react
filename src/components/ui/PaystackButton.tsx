@@ -1,5 +1,5 @@
 
-import React from 'react';
+
 import { PaystackButton } from 'react-paystack';
 import { toast } from 'react-toastify';
 
