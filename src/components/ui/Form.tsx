@@ -9,10 +9,12 @@ import NaijaStates from "naija-state-local-government";
 import InputText from "./Input";
 import SelectInput from "./Select";
 import { useApply } from "../../service/useApply";
+import { usePrograms } from "../../service/useProgram";
 
-export default function Form({ programId, handleCloseModal }) {
+export default function Form() {
   const { apply, isApplying } = useApply();
-
+  const { programs } = usePrograms();
+  let programId;
   const {
     register,
     handleSubmit,
@@ -44,6 +46,14 @@ export default function Form({ programId, handleCloseModal }) {
   const [selectedState, setSelectedState] = useState("");
   const watchState = watch("state");
 
+  const watchProgram = watch("program");
+  useEffect(() => {
+    if (watchProgram) {
+      programId = programs.find((program) => program.name === watchProgram)?.id;
+    }
+    console.log(programId);
+  }, [watchProgram, programs]);
+  
   useEffect(() => {
     if (watchState) {
       setSelectedState(watchState);
@@ -52,13 +62,11 @@ export default function Form({ programId, handleCloseModal }) {
 
   const onSubmit = (data) => {
     console.log(data);
- 
-    apply({ ...data, programId },
+
+    apply(
+      { ...data, programId },
       {
-        onSuccess: () => {
-          handleCloseModal()
-        },
-       
+        onSuccess: () => {},
       }
     );
   };
@@ -74,6 +82,15 @@ export default function Form({ programId, handleCloseModal }) {
     }
   };
 
+  const allowedStates = ["Anambra", "Imo", "Ebonyi", "Enugu", "Abia"];
+  const filteredStates = NaijaStates.states().filter((state) =>
+    allowedStates.includes(state)
+  );
+
+  
+
+  const programNames = programs.map((program) => program.name);
+
   return (
     <div className="apply-left-div text-black  shadow-lg p-5 rounded-lg max-w-[1000px] mx-auto">
       <h6 className="mb-4">Apply as Apprentice</h6>
@@ -82,6 +99,18 @@ export default function Form({ programId, handleCloseModal }) {
         onSubmit={handleSubmit(onSubmit)}
         className="grid grid-cols-1 gap-8 p-4 md:grid-cols-2 items-end"
       >
+        <div className="col-span-2">
+          <SelectInput
+            id="program"
+            label="Available Programs"
+            items={programNames}
+            handleChange={(e) => setValue("program", e.target.value)}
+            value={watch("program")}
+            placeholder="Select program"
+            error={errors.program?.message}
+            {...register("program", { required: "program is required" })}
+          />
+        </div>
         <InputText
           id="name"
           textLabel="Full Name"
@@ -93,7 +122,10 @@ export default function Form({ programId, handleCloseModal }) {
           {...register("name", { required: "Full Name is required" })}
         />
         <div className="flex flex-col">
-          <label htmlFor="profile_picture" className="mb-1 text-base font-medium">
+          <label
+            htmlFor="profile_picture"
+            className="mb-1 text-base font-medium"
+          >
             Photo
           </label>
           <input
@@ -156,17 +188,17 @@ export default function Form({ programId, handleCloseModal }) {
         <SelectInput
           id="country"
           label="Country"
-          items={["Country 1", "Country 2", "Country 3", "Country 4"]}
+          items={["Nigeria"]}
           handleChange={(e) => setValue("country", e.target.value)}
           value={watch("country")}
-          placeholder="Select your country"
+          placeholder="Nigeria"
           error={errors.country?.message}
           {...register("country", { required: "Country is required" })}
         />
         <SelectInput
           id="state"
           label="State"
-          items={NaijaStates.states()}
+          items={filteredStates}
           handleChange={(e) => setValue("state", e.target.value)}
           value={watchState}
           placeholder="Select your state"

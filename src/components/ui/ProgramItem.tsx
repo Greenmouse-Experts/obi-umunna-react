@@ -21,9 +21,9 @@ interface ProgramType {
 const ProgramItem = ({program}:{program:ProgramType}) => {
   const [isModalOpen, setIsModalOpen] = useState(false); // State for modal
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
+  // const handleOpenModal = () => {
+  //   setIsModalOpen(true);
+  // };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -31,9 +31,9 @@ const ProgramItem = ({program}:{program:ProgramType}) => {
 
   const [isOpenDonor, setisOpenDonor] = useState(false); // State for modal
 
-  const handleOpenDonor = () => {
-    setisOpenDonor(true);
-  };
+  // const handleOpenDonor = () => {
+  //   setisOpenDonor(true);
+  // };
 
   const handleCloseDonor = () => {
     setisOpenDonor(false);
@@ -48,16 +48,16 @@ const ProgramItem = ({program}:{program:ProgramType}) => {
         </p>
 
      <div className="flex justify-between mt-2">
-     <BtnCta onClick={handleOpenDonor}>Sponsor</BtnCta>
-     <BtnCta outline={true} onClick={handleOpenModal}>Register</BtnCta>
+     <BtnCta link="/sponsor">Sponsor</BtnCta>
+     <BtnCta outline={true} link="/apply">Register</BtnCta>
      </div>
       </div>
     </div>
     <Modal isOpen={isOpenDonor} handleClose={handleCloseDonor}>
-      <DonorForm programId={program.id}  handleCloseModal={handleCloseDonor}/>
+      <DonorForm  />
     </Modal>
     <Modal isOpen={isModalOpen} handleClose={handleCloseModal} >
-      <Form programId={program.id} handleCloseModal={handleCloseModal}/>
+      <Form  />
     </Modal>
     </>
   );
