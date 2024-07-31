@@ -22,10 +22,10 @@ export default function Breadcrumb({
       <p className="mt-4 flex items-center">
         <span>
           <NavLink to="/" className="">
-            Home {">"} &nbsp;
+            Home  &nbsp;
           </NavLink>{" "}
         </span>
-        / &nbsp; {breadcrumbText} {">"}
+        / &nbsp; {breadcrumbText}
       </p>
 
       </div>

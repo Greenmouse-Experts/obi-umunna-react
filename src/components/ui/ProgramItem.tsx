@@ -5,6 +5,7 @@ import Form from "./Form";
 // import DonorForm from "./DonorForm";
 import ViewMore from "./ViewMore";
 import { NavLink } from "react-router-dom";
+import { formatAsNgnMoney } from "../utils/helpers";
 
 interface ProgramType {
   id: number;
@@ -47,16 +48,20 @@ const ProgramItem = ({ program }: { program: ProgramType }) => {
         className="p-0 h-[30rem] bg-no-repeat bg-center bg-cover rounded-md place-content-end card-shadow w-full"
       >
         <div className="bg-white p-5 flex flex-col gap-4 justify-end rounded-md mt-auto ">
-          <p className="font-semibold">{program.name}</p>
+         <div>
+         <p className="font-semibold">{program.name}</p> 
+         <p className="font-semibold">{formatAsNgnMoney(program.budgetAmount)}</p>
+         </div>
           <p className="text-base">
             {program.description.slice(0, 60)}...{" "}
             <NavLink to={`/program/${program.id}`}>
-              <span className="font-semibold cursor-pointer">Read More</span>
+              <span className="font-semibold text-lg cursor-pointer">Read More</span>
             </NavLink>
           </p>
 
           <div className="flex justify-between mt-2">
             <BtnCta link="/sponsor">Sponsor</BtnCta>
+            
             <BtnCta outline={true} link="/apply">
               Register
             </BtnCta>
