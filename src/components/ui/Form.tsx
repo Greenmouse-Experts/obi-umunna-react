@@ -10,28 +10,36 @@ import InputText from "./Input";
 import SelectInput from "./Select";
 import { useApply } from "../../service/useApply";
 import { usePrograms } from "../../service/useProgram";
+import LoaderBig from "./LoaderBig";
+import { IoMdEye, IoMdEyeOff } from "react-icons/io";
 
 export default function Form() {
   const { apply, isApplying } = useApply();
-  const { programs } = usePrograms();
+  const { programs, isLoading } = usePrograms();
+  const [showPassword, setShowPassword] = useState(false);
+  const [programID, setProgramID] = useState("");
+
+  const togglePassword = () => {
+    setShowPassword(!showPassword); // Toggle the showPassword state
+  };
   let programId;
   const {
     register,
     handleSubmit,
     watch,
     setValue,
+    reset,
     formState: { errors },
   } = useForm({
     defaultValues: {
       name: "",
       email: "",
-      profile_picture: null,
+      photo: null,
       phone: "",
       gender: "",
       residentialAddress: "",
       lga: "",
       state: "",
-      country: "",
       levelOfEducation: "",
       educationCertificate: null,
       meansOfIdentification: "",
@@ -52,8 +60,9 @@ export default function Form() {
       programId = programs.find((program) => program.name === watchProgram)?.id;
     }
     console.log(programId);
+    setProgramID(programId)
   }, [watchProgram, programs]);
-  
+
   useEffect(() => {
     if (watchState) {
       setSelectedState(watchState);
@@ -64,9 +73,11 @@ export default function Form() {
     console.log(data);
 
     apply(
-      { ...data, programId },
+      { ...data, programId:programID, country:"Nigeria" },
       {
-        onSuccess: () => {},
+        onSuccess: () => {
+          reset();
+        },
       }
     );
   };
@@ -87,6 +98,8 @@ export default function Form() {
     allowedStates.includes(state)
   );
 
+
+  if(isLoading) return <LoaderBig/>
   
 
   const programNames = programs.map((program) => program.name);
@@ -99,7 +112,7 @@ export default function Form() {
         onSubmit={handleSubmit(onSubmit)}
         className="grid grid-cols-1 gap-8 p-4 md:grid-cols-2 items-end"
       >
-        <div className="col-span-2">
+        <div className="md:col-span-2">
           <SelectInput
             id="program"
             label="Available Programs"
@@ -130,9 +143,9 @@ export default function Form() {
           </label>
           <input
             type="file"
-            id="profile_picture"
+            id="photo"
             accept="image/*"
-            onChange={(e) => handleFileChange(e, "profile_picture")}
+            onChange={(e) => handleFileChange(e, "photo")}
             className="w-full py-3 px-4 h-16 outline-none  bg-[#F4F4F4] rounded-md text-base"
           />
           {errors.profile_picture && (
@@ -185,7 +198,7 @@ export default function Form() {
             required: "Residential Address is required",
           })}
         />
-        <SelectInput
+        {/* <SelectInput
           id="country"
           label="Country"
           items={["Nigeria"]}
@@ -194,7 +207,7 @@ export default function Form() {
           placeholder="Nigeria"
           error={errors.country?.message}
           {...register("country", { required: "Country is required" })}
-        />
+        /> */}
         <SelectInput
           id="state"
           label="State"
@@ -327,16 +340,26 @@ export default function Form() {
             required: "Next of Kin Address is required",
           })}
         />
+        <div className="w-full relative">
+
         <InputText
           id="password"
           textLabel="Password"
-          type="password"
+          type={showPassword ? "text" :"password"}
           setValue={(value) => setValue("password", value)}
           value={watch("password")}
           placeholder="Enter your password"
           error={errors.password?.message}
           {...register("password", { required: "Password is required" })}
         />
+       
+          <span
+            onClick={togglePassword}
+            className=" absolute top-10 right-3"
+          >
+            {showPassword ? <IoMdEyeOff size={30} /> : <IoMdEye size={30} />}
+          </span>
+       </div>
         <button
           type="submit"
           className="px-4 py-2 mt-4 bg-colorPrimary text-white rounded hover:bg-blue-600 transition-colors duration-200"

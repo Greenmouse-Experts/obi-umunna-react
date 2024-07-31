@@ -49,7 +49,7 @@ const Banner = () => {
                 the lives of those in need.
               </p>
               <div className="mt-10">
-                <BtnPrimary link="" color="">
+                <BtnPrimary link="/sponsor" color="">
                   Sponsor
                 </BtnPrimary>
               </div>
@@ -74,7 +74,7 @@ const Banner = () => {
                 the lives of those in need.
               </p>
               <div className="mt-10">
-                <BtnPrimary link="" color="">
+                <BtnPrimary link="/sponsor" color="">
                   Sponsor
                 </BtnPrimary>
               </div>
@@ -98,7 +98,7 @@ const Banner = () => {
                 the lives of those in need.
               </p>
               <div className="mt-10">
-                <BtnPrimary link="" color="">
+                <BtnPrimary link="/sponsor" color="">
                   Sponsor
                 </BtnPrimary>
               </div>
@@ -122,7 +122,7 @@ const Banner = () => {
                 the lives of those in need.
               </p>
               <div className="mt-10">
-                <BtnPrimary link="" color="">
+                <BtnPrimary link="/sponsor" color="">
                   Sponsor
                 </BtnPrimary>
               </div>

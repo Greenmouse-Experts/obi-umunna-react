@@ -12,6 +12,26 @@ export const fetchPrograms = async () => {
   return response.data.data;
 };
 
+export const fetchProgram = async (id:string | undefined) => {
+  const response = await axiosInstance.get(`/view/program?programId=${id}`); 
+  return response.data.data.program;
+};
+
+export const fetchTestimonials = async () => {
+  const response = await axiosInstance.get("/get/testimonies"); 
+  return response.data.data;
+};
+export const fetchPosts = async () => {
+  const response = await axiosInstance.get("/blog/posts"); 
+  return response.data.data;
+};
+
+export const fetchPost = async (id:string | undefined) => {
+  const response = await axiosInstance.get(`/view/single/blog/post?post_id=${id}`); 
+  return response.data.data;
+};
+
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export const apply = async (data: any) => {
   const response = await axiosInstance.post(`/applicant`, data);

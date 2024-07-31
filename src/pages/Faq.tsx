@@ -16,7 +16,7 @@ const Faq = () => {
     <>
       <Breadcrumb
         backgroundImage="/img/faq-banner.png"
-        breadcrumbText="FAQ"
+        breadcrumbText="FAQs"
       />
 
       <section>

@@ -32,7 +32,7 @@ function Header() {
         isScrolled ? "bg-[#1f1f1f] shadow-md " : "bg-transparent"
       }`}
     >
-      <div className="flex px-[7%] py-5 justify-between items-center">
+      <div className="flex 2xl:px-[6%] px-[4%] py-5 justify-between items-center">
         <NavLink to="/" className="w-56">
           <img src="/logo-white.png" alt="logo" className="" />
         </NavLink>
@@ -42,7 +42,10 @@ function Header() {
           } left-0 unset transition-all`}
         >
           <nav className="w-full scroll lg:text-[1rem] xl:text-white text-black">
-            <ul className="flex flex-col items-start gap-5 pt-3 pl-10 md:flex xl:flex-row xl:gap-14 xl:items-center xl:pt-0 xl:pl-0 sm:pl-20">
+            <ul className="flex flex-col items-start gap-5 pt-5 pl-10  md:flex xl:flex-row xl:gap-14 xl:items-center xl:pt-0 xl:pl-0 sm:pl-20">
+              <NavLink to="/" className="w-56 xl:hidden block" onClick={() => setMenu(false)}>
+                <img src="/logo.svg" alt="logo" className=" -ml-2" />
+              </NavLink>
               <li className="">
                 <NavLink
                   onClick={() => setMenu(false)}
@@ -52,84 +55,77 @@ function Header() {
                   Home
                 </NavLink>
               </li>
-              <li
-                className="relative flex flex-col items-start justify-center"
-               
-              >
+              <li className="relative flex flex-col items-start justify-center">
                 <p
                   className=" text-base  py-2  cursor-pointer flex items-center gap-2 text-nowrap"
                   onClick={() => setOpen((prev) => !prev)}
                 >
-                  About Us{" "}
-                  <span>
-                 { <MdKeyboardArrowDown/>}
-                  </span>
+                  About Us <span>{<MdKeyboardArrowDown />}</span>
                 </p>
                 <div
-                    className={` py-3 absolute w-[18rem] -left-14 xl:flex hidden flex-col justify-center items-center z-50 bg-white rounded-2xl p-5 transition-all   ${
-                      open ? "top-10" : "-top-96"
-                    }`}
+                  className={` py-3 absolute w-[18rem] -left-14 xl:flex hidden flex-col justify-center items-center z-50 bg-white rounded-2xl p-5 transition-all   ${
+                    open ? "top-10" : "-top-96"
+                  }`}
+                >
+                  <NavLink
+                    className=" py-3 px-2 w-full flex items-center  gap-4 text-center group text-black text-base text-nowrap hover:bg-colorPrimary hover:text-white hover:scale-[.98] transition-all duration-300 "
+                    onClick={() => {
+                      setOpen((prev) => !prev);
+                      setMenu(false);
+                    }}
+                    to="/about"
                   >
-                    <NavLink
-                      className=" py-3 px-2 w-full flex items-center  gap-4 text-center group text-black text-base text-nowrap hover:bg-colorPrimary hover:text-white hover:scale-[.98] transition-all duration-300 "
-                      onClick={() => {
-                        setOpen((prev) => !prev);
-                        setMenu(false);
-                      }}
-                      to="/about"
-                    >
-                      <span>
-                        <FaUser
-                          size={25}
-                          className="text-colorPrimary group-hover:text-white"
-                        />
-                      </span>
-                     About Us
-                    </NavLink>
-                    
-                    <NavLink
-                      className=" py-3 px-2 w-full flex items-center  gap-4 text-center group text-black text-base text-nowrap hover:bg-colorPrimary hover:text-white hover:scale-[.98] transition-all duration-300"
-                      onClick={() => {
-                        setOpen((prev) => !prev);
-                        setMenu(false);
-                      }}
-                      to="/excos"
-                    >
-                      <span>
-                        <RiTeamLine
-                          size={25}
-                          className="text-colorPrimary group-hover:text-white"
-                        />
-                      </span>
-                      Excos / Leadership
-                    </NavLink>
-                  </div>
-                  <div
-                    className={` py-1  -left-14 xl:hidden flex-col justify-center items-center z-50 bg-white rounded-2xl p-5 transition-all ${
-                      open ? "flex" : "hidden"
-                    }`}
-                  >
-                    <NavLink
-                      className=" py-3 px-1 w-full flex items-center gap-4 text-center text-bluePrimary  font-medium text-nowrap "
-                      onClick={() => {
-                        setMenu(false);
-                      }}
-                      to="/about"
-                    >
-                      About Us
-                    </NavLink>
-                  
-                    <NavLink
-                      className=" py-3 px-1 w-full flex items-center gap-4 text-center text-bluePrimary  font-medium text-nowrap"
-                      onClick={() => {
-                        setMenu(false);
-                      }}
-                      to="/excos"
-                    >
-                      Excos / Leadership
-                    </NavLink>
-                  </div>
+                    <span>
+                      <FaUser
+                        size={25}
+                        className="text-colorPrimary group-hover:text-white"
+                      />
+                    </span>
+                    About Us
+                  </NavLink>
 
+                  <NavLink
+                    className=" py-3 px-2 w-full flex items-center  gap-4 text-center group text-black text-base text-nowrap hover:bg-colorPrimary hover:text-white hover:scale-[.98] transition-all duration-300"
+                    onClick={() => {
+                      setOpen((prev) => !prev);
+                      setMenu(false);
+                    }}
+                    to="/excos"
+                  >
+                    <span>
+                      <RiTeamLine
+                        size={25}
+                        className="text-colorPrimary group-hover:text-white"
+                      />
+                    </span>
+                    Excos / Leadership
+                  </NavLink>
+                </div>
+                <div
+                  className={` py-1  -left-14 xl:hidden flex-col justify-center items-center z-50 bg-white rounded-2xl p-5 transition-all ${
+                    open ? "flex" : "hidden"
+                  }`}
+                >
+                  <NavLink
+                    className=" py-3 px-1 w-full flex items-center gap-4 text-center text-bluePrimary   text-nowrap "
+                    onClick={() => {
+                      setMenu(false);
+                    }}
+                    to="/about"
+                  >
+                    About Us
+                  </NavLink>
+
+                  <NavLink
+                    className=" py-3 px-1 w-full flex items-center gap-4 text-center text-bluePrimary   text-nowrap"
+                    onClick={() => {
+                      setMenu(false);
+                    }}
+                    to="/excos"
+                  >
+                    Excos / Leadership
+                  </NavLink>
+                </div>
               </li>
               <li className="relative">
                 <NavLink
@@ -141,25 +137,40 @@ function Header() {
                 </NavLink>
               </li>
               <li className="relative">
+                <NavLink
+                  onClick={() => setMenu(false)}
+                  className="text-nowrap"
+                  to="/blog"
+                >
+                  Blog
+                </NavLink>
+              </li>
+              <li className="relative">
                 <NavLink onClick={() => setMenu(false)} className="" to="/faq">
-                  FAQ
+                  FAQs
                 </NavLink>
               </li>
               <li>
-                <NavLink onClick={() => setMenu(false)} className="" to="/contact">
+                <NavLink
+                  onClick={() => setMenu(false)}
+                  className=""
+                  to="/contact"
+                >
                   Contact Us
                 </NavLink>
               </li>
             </ul>
           </nav>
-          <div className="flex items-center gap-4">
+          <div className="flex  items-center gap-4">
             <NavLink
+              onClick={() => setMenu(false)}
               to="/sponsor"
               className="!px-6 py-3 text-sm text-white bg-colorPrimary text-nowrap btn btn-green 2xl:"
             >
               Become a Sponsor
             </NavLink>
             <NavLink
+              onClick={() => setMenu(false)}
               to="/apply"
               className="!px-6 py-3 text-sm text-white bg-colorPrimary text-nowrap btn btn-green 2xl:"
             >
@@ -171,7 +182,7 @@ function Header() {
           className="block cursor-pointer 2xl:hidden xl:hidden"
           onClick={() => setMenu((open) => !open)}
         >
-          <GiHamburgerMenu size={40} color="#015907" />
+          <GiHamburgerMenu size={40} color="#fff" />
         </div>
       </div>
     </header>

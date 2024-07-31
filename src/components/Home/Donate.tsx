@@ -1,4 +1,5 @@
 import { FaCircleArrowRight } from "react-icons/fa6";
+import { NavLink } from "react-router-dom";
 
 const Donate = () => {
   return (
@@ -14,11 +15,13 @@ const Donate = () => {
               The foundation stone of this Great body was laid in Stuttgart on
             </p>
           </div>
-          <FaCircleArrowRight
+         <NavLink to="/sponsor">
+         <FaCircleArrowRight
             className="absolute bottom-4 right-4"
             size={25}
             color="#0B6F4F"
           />
+         </NavLink>
         </div>
 
         <div className="bg-[#EAE7F5] px-3 py-8 flex gap-3 rounded-[10px] relative">
@@ -31,7 +34,9 @@ const Donate = () => {
               The foundation stone of this Great body was laid in Stuttgart on
             </p>
           </div>
+          <NavLink to="/apply">
           <FaCircleArrowRight className="absolute bottom-4 right-4" size={25} color="#2708A5" />
+          </NavLink>
         </div>
 
         <div className="bg-[#F8EADE] px-3 py-8 flex gap-3 rounded-[10px] relative">
@@ -44,7 +49,9 @@ const Donate = () => {
               The foundation stone of this Great body was laid in Stuttgart on
             </p>
           </div>
+          <NavLink to="/apply">
           <FaCircleArrowRight className="absolute bottom-4 right-4" size={25} color="#A4764C" />
+          </NavLink>
         </div>
       </div>
     </section>

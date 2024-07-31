@@ -14,7 +14,7 @@ export default function Breadcrumb({
 }: BreadcrumbProps) {
   return (
     <section
-      className=" relative text-white bg-cover bg-bottom bg-no-repeat   md:h-[250px] xl:h-[350px]"
+      className=" relative text-white bg-cover bg-bottom bg-no-repeat  h-[200px]  md:h-[250px] xl:h-[350px]"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
       <div className="absolute top-1/2 left-[7%] transform ">

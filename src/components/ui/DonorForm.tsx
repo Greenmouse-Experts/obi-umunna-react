@@ -7,11 +7,14 @@ import SelectInput from "./Select";
 import { useDonate } from "../../service/useApply";
 import PaystackPaymentButton from "./PaystackButton";
 import { usePrograms } from "../../service/useProgram";
+import LoaderBig from "./LoaderBig";
+import { formatAsNgnMoney } from "../utils/helpers";
 
 export default function DonorForm() {
   const { donate, isDonating } = useDonate();
-  const { programs } = usePrograms();
+  const { programs,  isLoading} = usePrograms();
   let programId;
+  let budgetAmount;
   const {
     register,
     handleSubmit,
@@ -36,6 +39,7 @@ export default function DonorForm() {
   const [selectedSponsor, setSelectedSponsor] = useState("");
   const [paystackRef, setPaystackRef] = useState(null);
   const [formData, setFormData] = useState(null);
+  const [budgetamount, setbudgetamount] = useState()
 
   const watchState = watch("recognitionPreferences");
   const watchSponsor = watch("typeOfSponsorship");
@@ -56,9 +60,11 @@ export default function DonorForm() {
   useEffect(() => {
     if (watchProgram) {
       programId = programs.find((program) => program.name === watchProgram)?.id;
+      budgetAmount = programs.find((program) => program.name === watchProgram)?.budgetAmount;
     }
-    console.log(programId);
-  }, [watchProgram, programs]);
+    setbudgetamount(budgetAmount)
+    
+  }, [watchProgram, programs, budgetAmount]);
 
   const handleFormSubmit = (data) => {
     console.log("Form data:", data); // Debug log
@@ -92,13 +98,16 @@ export default function DonorForm() {
       reader.readAsDataURL(file);
     }
   };
+  
+  if(isLoading) return <LoaderBig/>
+  
   const programNames = programs.map((program) => program.name);
   return (
     <div className="apply-left-div text-black shadow-lg p-5 rounded-lg max-w-[1000px] mx-auto">
       <h6 className="mb-4">Sponsor a Program</h6>
       <form onSubmit={handleSubmit(handleFormSubmit)} className="">
         <div className="grid grid-cols-1 gap-8 p-4 lg:grid-cols-2 items-end">
-          <div className="col-span-2">
+          <div className="lg:col-span-2">
             <SelectInput
               id="program"
               label="Available Programs"
@@ -112,11 +121,12 @@ export default function DonorForm() {
           </div>
           <InputText
             id="amount"
-            textLabel="Amount"
+            textLabel={`Budget Amount - ${formatAsNgnMoney(budgetamount)}`}
+            //  textLabel={`${budgetamount}`}
             type="number"
             setValue={(value) => setValue("amount", value)}
             value={watch("amount")}
-            placeholder="Enter your full amount"
+            placeholder="Enter sponsor amount"
             error={errors.amount?.message}
             {...register("amount", { required: "Amount is required" })}
           />
@@ -131,7 +141,7 @@ export default function DonorForm() {
             error={errors.email?.message}
             {...register("email", { required: "Email is required" })}
           />
-          <div className="col-span-2">
+          <div className="lg:col-span-2">
             <SelectInput
               id="recognitionPreferences"
               label="Recognition Preferences"
@@ -140,7 +150,7 @@ export default function DonorForm() {
                 setValue("recognitionPreferences", e.target.value)
               }
               value={watch("recognitionPreferences")}
-              placeholder="Select recognitionPreferences"
+              placeholder="Select Recognition Preferences"
               error={errors.recognitionPreferences?.message}
               {...register("recognitionPreferences", {
                 required: "Recognition Preferences is required",
@@ -174,7 +184,7 @@ export default function DonorForm() {
                 required: "Residential Address is required",
               })}
             />
-            <div className="col-span-2">
+            <div className="lg:col-span-2">
               <SelectInput
                 id="typeOfSponsorship"
                 label="Type of Sponsorship"

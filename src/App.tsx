@@ -11,6 +11,9 @@ import Faq from "./pages/Faq";
 import Excos from "./pages/Excos";
 import Apply from "./pages/Apply";
 import Sponsor from "./pages/Sponsor";
+import Blogs from "./pages/Blogs";
+import Blog from "./pages/Blog";
+import Program from "./pages/Program";
 
 const router = createBrowserRouter([
   {
@@ -27,6 +30,10 @@ const router = createBrowserRouter([
       {
         path: "/programs",
         element: <Programs />,
+      },
+      {
+        path: "/program/:id",
+        element: <Program />,
       },
       {
         path: "/contact",
@@ -47,6 +54,14 @@ const router = createBrowserRouter([
       {
         path: "/sponsor",
         element: <Sponsor />,
+      },
+      {
+        path: "/blog",
+        element: <Blogs />,
+      },
+      {
+        path: "/blog/:id",
+        element: <Blog />,
       },
     ],
   },
