@@ -21,7 +21,7 @@ const InputText: React.FC<InputProps> = React.forwardRef(({
   ...rest
 }, ref) => {
   return (
-    <div className="w-[100%] sm:w-[100%] relative flex items-start flex-col">
+    <div className="w-[100%]  relative flex items-start flex-col">
       <label htmlFor={id} className="text-base font-medium text-black">{textLabel}</label>
       <input
         type={type}

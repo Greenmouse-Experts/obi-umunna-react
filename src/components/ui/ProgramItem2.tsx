@@ -64,8 +64,8 @@ const ProgramItem2 = ({ program }: { program: ProgramType }) => {
           {program.description}
         </p>
         <div className="flex justify-between mt-5">
-          <BtnCta >Sponsor</BtnCta>
-          <BtnCta >Register</BtnCta>
+          <BtnCta link="/sponsor" >Sponsor</BtnCta>
+          <BtnCta link="/apply" >Register</BtnCta>
         </div>
       </div>
     </div>

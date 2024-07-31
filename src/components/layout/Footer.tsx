@@ -1,52 +1,92 @@
-import {  BsSendFill } from "react-icons/bs";
+import axios from "axios";
+import { FormEvent, useState } from "react";
+import { BsSendFill } from "react-icons/bs";
 import { NavLink } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Footer = () => {
+  const [loading, setLoading] = useState(false);
+  const [email, setemail] = useState("");
+  const onSubmit = async (e:FormEvent) => {
+    e.preventDefault();
+    if (email === "") return;
+    setLoading(true);
+
+    try {
+      const res = await axios.post(
+        `https://obi.victornwadinobi.com/api/subscribe/newsletter`,
+        {
+          email,
+        }
+      );
+      console.log(res);
+      setemail("")
+      toast.success("Form submitted successfully");
+    } catch (error) {
+      toast.error("Fail to submit");
+    }
+    setLoading(false);
+  };
   return (
     <>
-    <footer className="bg-[#141414] py-[3rem] ">
-      <div className="flex justify-between items-center lg:flex-row flex-col  md:gap-0 gap-10 ">
-        <div className=" h-full flex flex-col items-center lg:w-[26%]">
-          <img
-            src="/img/logo-plain.png"
-            alt=""
-            className="  "
-          />
-         <p className="text-lg text-white font-semibold">Join Our Community</p>
-         <div className="flex items-center h-12 mt-4 gap-3 w-full">
-          <input type="text" placeholder="Enter email " className="h-full w-full  rounded-lg pl-3"/>
-          <div className="bg-colorPrimary  px-5 h-full rounded-lg place-items-center place-content-center"><BsSendFill color="white"size={30}/></div>
-         </div>
-        </div>
+      <footer className="bg-[#141414] py-[3rem] ">
+        <div className="flex justify-between items-center lg:flex-row flex-col  md:gap-0 gap-10 ">
+          <div className=" h-full flex flex-col items-center lg:w-[26%]">
+            <img src="/img/logo-plain.png" alt="" className="  " />
+            <p className="text-lg text-white font-semibold">
+              Join Our Community
+            </p>
+            <form
+              onSubmit={onSubmit}
+              className="flex items-center h-12 mt-4 gap-3 w-full"
+            >
+              <input
+                type="email"
+                placeholder="Enter email "
+                onChange={(e) => setemail(e.target.value)}
+                value={email}
+                className="h-full w-full  rounded-lg pl-3"
+              />
+              <button
+                type="submit"
+                className="bg-colorPrimary  px-5 h-full rounded-lg place-items-center place-content-center"
+              >
+                {loading ? (
+                  <p>sending</p>
+                ) : (
+                  <BsSendFill color="white" size={30} />
+                )}
+              </button>
+            </form>
+          </div>
 
-        <div className=" text-white">
-          <ul className="flex flex-wrap gap-10  mt-5">
-            <li className="   capitalize">
-              <NavLink to="/">Home</NavLink>
-            </li>
-            <li className="   capitalize">
-              <NavLink to="/about">About Us</NavLink>
-            </li>
-            <li className="   capitalize">
-              <NavLink to="/">Program</NavLink>
-            </li>
-            <li className="   capitalize">
-              <NavLink to="/">FAQ</NavLink>
-            </li>
-            <li className="   capitalize">
-              <NavLink to="/">Contact Us</NavLink>
-            </li>
-            <li className="   capitalize">
-              <NavLink to="/">Become a Sponsor</NavLink>
-            </li>
-            <li className="   capitalize">
-              <NavLink to="/">Apply for  a Skill</NavLink>
-            </li>
-          </ul>
-        </div>
+          <div className=" text-white">
+            <ul className="flex flex-wrap gap-10  mt-5">
+              <li className="   capitalize">
+                <NavLink to="/">Home</NavLink>
+              </li>
+              <li className="   capitalize">
+                <NavLink to="/about">About Us</NavLink>
+              </li>
+              <li className="   capitalize">
+                <NavLink to="/programs">Program</NavLink>
+              </li>
+              <li className="   capitalize">
+                <NavLink to="/faq">FAQ</NavLink>
+              </li>
+              <li className="   capitalize">
+                <NavLink to="/contact">Contact Us</NavLink>
+              </li>
+              <li className="   capitalize">
+                <NavLink to="/sponsor">Become a Sponsor</NavLink>
+              </li>
+              <li className="   capitalize">
+                <NavLink to="/apply">Apply for a Skill</NavLink>
+              </li>
+            </ul>
+          </div>
 
-
-        {/* <div className="bg-white rounded-xl p-4 py-10">
+          {/* <div className="bg-white rounded-xl p-4 py-10">
           <h6>Newsletter</h6>
           <div className="mt-3">
             <p>Subscribe to our newsletter for latest update</p>
@@ -60,13 +100,11 @@ const Footer = () => {
             Subscribe
           </button>
         </div>  */}
-      </div>
-
-    
-    </footer>
-    <div className=" flex justify-center items-center py-6  text-white bg-[#2708A5]">
+        </div>
+      </footer>
+      <div className=" flex justify-center items-center py-6  text-white bg-[#2708A5]">
         <p className="2xl:text-base text-sm font-pSans px-1 text-center">
-        Copyright © 2024Obiumunna na umuada . All Rights Reserved
+          Copyright © 2024Obiumunna na umuada . All Rights Reserved
         </p>
       </div>
     </>

@@ -9,7 +9,7 @@ const Empower = () => {
           <p className=" lg:w-3/4">
           With your continued support, we'll reach even more communities, leaving a lasting legacy of compassion and change.
           </p>
-          <BtnPrimary link="" color="">
+          <BtnPrimary link="/sponsor" color="">
             Sponsor
           </BtnPrimary>
         </div>

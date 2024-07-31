@@ -10,7 +10,7 @@ const Excos = () => {
       />
 
       <section className="grid xl:grid-cols-2 grid-cols-1 justify-between">
-        <div className="flex items-center gap-7">
+        <div className="flex items-center md:flex-row flex-col gap-7">
           <img src="/img/excos-1.png" alt="" className="scale-90" />
           <div>
             <p className="text-xl font-semibold">
@@ -29,7 +29,7 @@ const Excos = () => {
            </div>
           </div>
         </div>
-        <div className="flex items-center gap-7">
+        <div className="flex items-center md:flex-row flex-col gap-7">
           <img src="/img/excos-2.png" alt="" className="scale-90" />
           <div>
             <p className="text-xl font-semibold">

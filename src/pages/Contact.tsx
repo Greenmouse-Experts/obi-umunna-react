@@ -7,6 +7,8 @@ import InputText from "../components/ui/Input";
 import { ImMobile2 } from "react-icons/im";
 import { MdOutlineEmail } from "react-icons/md";
 import { GrLocation } from "react-icons/gr";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Contact = () => {
   const [loading, setLoading] = useState(false);
@@ -18,22 +20,27 @@ const Contact = () => {
     formState: { errors },
   } = useForm({
     defaultValues: {
-      full_name: "",
+      fullName: "",
       email: "",
-      phone: "",
+      phoneNumber: "",
       subject: "",
-      message: "",
+      description: "",
     },
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     setLoading(true);
-    console.log(data);
-    // Simulate API call
-    setTimeout(() => {
-      setLoading(false);
-      alert("Message sent successfully!");
-    }, 2000);
+    console.log(data)
+    try {
+      const res = await axios.post(`https://obi.victornwadinobi.com/api/submit/contact`,{
+        ...data
+      })
+      console.log(res)
+      toast.success("Form submitted successfully")
+    } catch (error) {
+      toast.error("Fail to submit")
+    }
+    setLoading(false);
   };
 
   return (
@@ -69,33 +76,33 @@ const Contact = () => {
           </div>
         </div>
 
-        <div className="bg-bluePrimary text-white px-8 py-10 lg:w-[50%] w-full md:ml-3 ml-0 shadow-md">
+        <div className="bg-bluePrimary text-black px-8 py-10 lg:w-[50%] w-full md:ml-3 ml-0 shadow-md">
           <form
-            className="flex flex-col 2xl:gap-8 gap-5"
+            className="flex flex-col 2xl:gap-8 gap-5 "
             onSubmit={handleSubmit(onSubmit)}
           >
             <div className="flex lg:flex-row flex-col justify-between gap-8">
               <InputText
-                id="full_name"
+                id="fullName"
                 textLabel="Full Name"
                 type="text"
-                setValue={(value) => setValue("full_name", value)}
-                value={watch("full_name")}
+                setValue={(value) => setValue("fullName", value)}
+                value={watch("fullName")}
                 placeholder="Enter your full name"
-                error={errors.full_name?.message}
-                {...register("full_name", {
+                error={errors.fullName?.message}
+                {...register("fullName", {
                   required: "Full Name is required",
                 })}
               />
               <InputText
-                id="phone"
+                id="phoneNumber"
                 textLabel="Phone Number"
                 type="tel"
-                setValue={(value) => setValue("phone", value)}
-                value={watch("phone")}
+                setValue={(value) => setValue("phoneNumber", value)}
+                value={watch("phoneNumber")}
                 placeholder="Enter your phone number"
-                error={errors.phone?.message}
-                {...register("phone", {
+                error={errors.phoneNumber?.message}
+                {...register("phoneNumber", {
                   required: "Phone Number is required",
                 })}
               />
@@ -125,14 +132,14 @@ const Contact = () => {
                 Message
               </label>
               <textarea
-                id="message"
+                id="description"
                 className="w-full p-2 mt-2 bg-[#F4F4F4] rounded-md"
                 rows="5"
                 placeholder="Enter your message"
-                {...register("message", { required: "Message is required" })}
+                {...register("description", { required: "Message is required" })}
               />
-              {errors.message && (
-                <p className="text-red-500">{errors.message.message}</p>
+              {errors.description && (
+                <p className="text-red-500">{errors.message.description}</p>
               )}
             </div>
             <button

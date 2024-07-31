@@ -38,7 +38,7 @@ const SelectInput: React.FC<SelectProps> = React.forwardRef(({
         {...rest}
       >
         <option value="">{placeholder}</option>
-        {items.map((option: string, index: number) => (
+        {items?.map((option: string, index: number) => (
           <option key={index} value={option}>{option}</option>
         ))}
       </select>

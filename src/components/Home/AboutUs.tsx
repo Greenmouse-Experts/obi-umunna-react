@@ -19,7 +19,7 @@ const AboutUs = () => {
 
           <div></div>
           <div className="mt-5">
-            <BtnPrimary icon={false} link="" color="">
+            <BtnPrimary icon={false} link="/about" color="">
               Read More
             </BtnPrimary>
           </div>

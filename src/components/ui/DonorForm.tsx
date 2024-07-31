@@ -6,11 +6,22 @@ import InputText from "./Input";
 import SelectInput from "./Select";
 import { useDonate } from "../../service/useApply";
 import PaystackPaymentButton from "./PaystackButton";
+import { usePrograms } from "../../service/useProgram";
+import LoaderBig from "./LoaderBig";
+import { formatAsNgnMoney } from "../utils/helpers";
 
-
-export default function DonorForm({ programId, handleCloseModal }) {
+export default function DonorForm() {
   const { donate, isDonating } = useDonate();
-  const { register, handleSubmit, watch, setValue, formState: { errors } } = useForm({
+  const { programs,  isLoading} = usePrograms();
+  let programId;
+  let budgetAmount;
+  const {
+    register,
+    handleSubmit,
+    watch,
+    setValue,
+    formState: { errors },
+  } = useForm({
     defaultValues: {
       amount: "",
       email: "",
@@ -28,6 +39,7 @@ export default function DonorForm({ programId, handleCloseModal }) {
   const [selectedSponsor, setSelectedSponsor] = useState("");
   const [paystackRef, setPaystackRef] = useState(null);
   const [formData, setFormData] = useState(null);
+  const [budgetamount, setbudgetamount] = useState()
 
   const watchState = watch("recognitionPreferences");
   const watchSponsor = watch("typeOfSponsorship");
@@ -43,6 +55,16 @@ export default function DonorForm({ programId, handleCloseModal }) {
       setSelectedSponsor(watchSponsor);
     }
   }, [watchSponsor]);
+
+  const watchProgram = watch("program");
+  useEffect(() => {
+    if (watchProgram) {
+      programId = programs.find((program) => program.name === watchProgram)?.id;
+      budgetAmount = programs.find((program) => program.name === watchProgram)?.budgetAmount;
+    }
+    setbudgetamount(budgetAmount)
+    
+  }, [watchProgram, programs, budgetAmount]);
 
   const handleFormSubmit = (data) => {
     console.log("Form data:", data); // Debug log
@@ -76,19 +98,35 @@ export default function DonorForm({ programId, handleCloseModal }) {
       reader.readAsDataURL(file);
     }
   };
-
+  
+  if(isLoading) return <LoaderBig/>
+  
+  const programNames = programs.map((program) => program.name);
   return (
     <div className="apply-left-div text-black shadow-lg p-5 rounded-lg max-w-[1000px] mx-auto">
       <h6 className="mb-4">Sponsor a Program</h6>
       <form onSubmit={handleSubmit(handleFormSubmit)} className="">
         <div className="grid grid-cols-1 gap-8 p-4 lg:grid-cols-2 items-end">
+          <div className="lg:col-span-2">
+            <SelectInput
+              id="program"
+              label="Available Programs"
+              items={programNames}
+              handleChange={(e) => setValue("program", e.target.value)}
+              value={watch("program")}
+              placeholder="Select program"
+              error={errors.program?.message}
+              {...register("program", { required: "program is required" })}
+            />
+          </div>
           <InputText
             id="amount"
-            textLabel="Amount"
+            textLabel={`Budget Amount - ${formatAsNgnMoney(budgetamount)}`}
+            //  textLabel={`${budgetamount}`}
             type="number"
             setValue={(value) => setValue("amount", value)}
             value={watch("amount")}
-            placeholder="Enter your full amount"
+            placeholder="Enter sponsor amount"
             error={errors.amount?.message}
             {...register("amount", { required: "Amount is required" })}
           />
@@ -103,19 +141,22 @@ export default function DonorForm({ programId, handleCloseModal }) {
             error={errors.email?.message}
             {...register("email", { required: "Email is required" })}
           />
-
-          <SelectInput
-            id="recognitionPreferences"
-            label="Recognition Preferences"
-            items={["Anonymous", "Public acknowledgment"]}
-            handleChange={(e) => setValue("recognitionPreferences", e.target.value)}
-            value={watch("recognitionPreferences")}
-            placeholder="Select recognitionPreferences"
-            error={errors.recognitionPreferences?.message}
-            {...register("recognitionPreferences", {
-              required: "Recognition Preferences is required",
-            })}
-          />
+          <div className="lg:col-span-2">
+            <SelectInput
+              id="recognitionPreferences"
+              label="Recognition Preferences"
+              items={["Anonymous", "Public acknowledgment"]}
+              handleChange={(e) =>
+                setValue("recognitionPreferences", e.target.value)
+              }
+              value={watch("recognitionPreferences")}
+              placeholder="Select Recognition Preferences"
+              error={errors.recognitionPreferences?.message}
+              {...register("recognitionPreferences", {
+                required: "Recognition Preferences is required",
+              })}
+            />
+          </div>
         </div>
 
         {selectedState === "Public acknowledgment" && (
@@ -139,63 +180,80 @@ export default function DonorForm({ programId, handleCloseModal }) {
               value={watch("homeAddress")}
               placeholder="Enter your residential address"
               error={errors.homeAddress?.message}
-              {...register("homeAddress", { required: "Residential Address is required" })}
+              {...register("homeAddress", {
+                required: "Residential Address is required",
+              })}
             />
-
-            <SelectInput
-              id="typeOfSponsorship"
-              label="Type of Sponsorship"
-              items={["Corporate", "Individual"]}
-              handleChange={(e) => setValue("typeOfSponsorship", e.target.value)}
-              value={watch("typeOfSponsorship")}
-              placeholder="Select type of sponsorship"
-              error={errors.typeOfSponsorship?.message}
-              {...register("typeOfSponsorship", { required: "Type of Sponsorship is required" })}
-            />
-          </div>
-        )}
-
-        {selectedSponsor === "Corporate" && selectedState === "Public acknowledgment" && (
-          <div className="grid grid-cols-1 gap-8 p-4 lg:grid-cols-2 items-end">
-            <InputText
-              id="companyName"
-              textLabel="Company Name"
-              type="text"
-              setValue={(value) => setValue("companyName", value)}
-              value={watch("companyName")}
-              placeholder="Enter company name"
-              error={errors.companyName?.message}
-              {...register("companyName", { required: "Company Name is required" })}
-            />
-
-            <div className="flex flex-col">
-              <label htmlFor="companyLogo" className="mb-1 text-sm font-medium">
-                Company Logo
-              </label>
-              <input
-                type="file"
-                id="companyLogo"
-                accept="image/*"
-                onChange={(e) => handleFileChange(e, "companyLogo")}
-                className="w-full py-3 px-4 h-16 outline-none bg-[#F4F4F4] rounded-md text-sm"
+            <div className="lg:col-span-2">
+              <SelectInput
+                id="typeOfSponsorship"
+                label="Type of Sponsorship"
+                items={["Corporate", "Individual"]}
+                handleChange={(e) =>
+                  setValue("typeOfSponsorship", e.target.value)
+                }
+                value={watch("typeOfSponsorship")}
+                placeholder="Select type of sponsorship"
+                error={errors.typeOfSponsorship?.message}
+                {...register("typeOfSponsorship", {
+                  required: "Type of Sponsorship is required",
+                })}
               />
-              {errors.companyLogo && (
-                <span className="text-red-500 text-sm">{errors.companyLogo.message}</span>
-              )}
             </div>
-
-            <InputText
-              id="companyAddress"
-              textLabel="Company Address"
-              type="text"
-              setValue={(value) => setValue("companyAddress", value)}
-              value={watch("companyAddress")}
-              placeholder="Enter company address"
-              error={errors.companyAddress?.message}
-              {...register("companyAddress", { required: "Company Address is required" })}
-            />
           </div>
         )}
+
+        {selectedSponsor === "Corporate" &&
+          selectedState === "Public acknowledgment" && (
+            <div className="grid grid-cols-1 gap-8 p-4 lg:grid-cols-2 items-end">
+              <InputText
+                id="companyName"
+                textLabel="Company Name"
+                type="text"
+                setValue={(value) => setValue("companyName", value)}
+                value={watch("companyName")}
+                placeholder="Enter company name"
+                error={errors.companyName?.message}
+                {...register("companyName", {
+                  required: "Company Name is required",
+                })}
+              />
+
+              <div className="flex flex-col">
+                <label
+                  htmlFor="companyLogo"
+                  className="mb-1 text-sm font-medium"
+                >
+                  Company Logo
+                </label>
+                <input
+                  type="file"
+                  id="companyLogo"
+                  accept="image/*"
+                  onChange={(e) => handleFileChange(e, "companyLogo")}
+                  className="w-full py-3 px-4 h-16 outline-none bg-[#F4F4F4] rounded-md text-sm"
+                />
+                {errors.companyLogo && (
+                  <span className="text-red-500 text-sm">
+                    {errors.companyLogo.message}
+                  </span>
+                )}
+              </div>
+
+              <InputText
+                id="companyAddress"
+                textLabel="Company Address"
+                type="text"
+                setValue={(value) => setValue("companyAddress", value)}
+                value={watch("companyAddress")}
+                placeholder="Enter company address"
+                error={errors.companyAddress?.message}
+                {...register("companyAddress", {
+                  required: "Company Address is required",
+                })}
+              />
+            </div>
+          )}
 
         {!formData && !isDonating ? (
           <button

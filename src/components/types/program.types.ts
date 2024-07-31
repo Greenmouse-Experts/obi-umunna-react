@@ -11,4 +11,12 @@ export interface ProgramType {
     createdAt: string;
     updatedAt: string;
   }
+
+  export interface BlogType {
+    id: number;
+   title:string;
+   description:string;
+   image:string;
+   createdAt:string;
+  }
   

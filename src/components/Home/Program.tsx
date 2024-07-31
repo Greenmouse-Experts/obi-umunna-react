@@ -3,11 +3,13 @@ import ProgramItem from "../ui/ProgramItem";
 import { usePrograms } from "../../service/useProgram";
 import { ProgramType } from "../types/program.types";
 import BtnPrimary from "../Buttons/BtnPrimary";
+import Slider from "react-slick";
+import { programSettings } from "../../helpers/settings";
 
 const Programs = () => {
   const {programs} = usePrograms()
 
-  console.log(programs)
+
 
 
   return (
@@ -21,16 +23,18 @@ const Programs = () => {
         </div>
 
         <div className="">
-        <BtnPrimary link="">
+        <BtnPrimary link="/programs">
         View All Causes
           
         </BtnPrimary>
         </div>
       </div>
-      <div className="grid xl:grid-cols-3 sm:grid-cols-2 grid-cols-1 gap-x-8 mt-14 ">
-        {programs?.map((program:ProgramType) => (
-          <ProgramItem key={program.id} program={program} />
-        ))}
+      <div className="mt-14 ">
+      <Slider {...programSettings}>
+          {programs?.map((program: ProgramType) => (
+            <ProgramItem key={program.id} program={program} />
+          ))}
+          </Slider>
       
       </div>
 

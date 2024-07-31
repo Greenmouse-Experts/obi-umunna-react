@@ -2,7 +2,9 @@ import { useState } from "react";
 import BtnCta from "../Buttons/BtnCta";
 import Modal from "../Modal";
 import Form from "./Form";
-import DonorForm from "./DonorForm";
+// import DonorForm from "./DonorForm";
+import ViewMore from "./ViewMore";
+import { NavLink } from "react-router-dom";
 
 interface ProgramType {
   id: number;
@@ -18,12 +20,12 @@ interface ProgramType {
   updatedAt: string;
 }
 
-const ProgramItem = ({program}:{program:ProgramType}) => {
+const ProgramItem = ({ program }: { program: ProgramType }) => {
   const [isModalOpen, setIsModalOpen] = useState(false); // State for modal
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
+  // const handleOpenModal = () => {
+  //   setIsModalOpen(true);
+  // };
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
@@ -31,34 +33,42 @@ const ProgramItem = ({program}:{program:ProgramType}) => {
 
   const [isOpenDonor, setisOpenDonor] = useState(false); // State for modal
 
-  const handleOpenDonor = () => {
-    setisOpenDonor(true);
-  };
+  // const handleOpenDonor = () => {
+  //   setisOpenDonor(true);
+  // };
 
   const handleCloseDonor = () => {
     setisOpenDonor(false);
   };
   return (
     <>
-    <div style={{ backgroundImage: `url(${program.supportBanner})` }} className="p-0 h-[30rem] bg-no-repeat bg-center bg-cover rounded-md place-content-end card-shadow">
-      <div className="bg-white p-5 flex flex-col gap-4 justify-end rounded-md mt-auto ">
-        <p className="font-semibold">{program.name}</p>
-        <p className="text-base">
-          {program.description.slice(0, 60)}
-        </p>
+      <div
+        style={{ backgroundImage: `url(${program.supportBanner})` }}
+        className="p-0 h-[30rem] bg-no-repeat bg-center bg-cover rounded-md place-content-end card-shadow w-full"
+      >
+        <div className="bg-white p-5 flex flex-col gap-4 justify-end rounded-md mt-auto ">
+          <p className="font-semibold">{program.name}</p>
+          <p className="text-base">
+            {program.description.slice(0, 60)}...{" "}
+            <NavLink to={`/program/${program.id}`}>
+              <span className="font-semibold cursor-pointer">Read More</span>
+            </NavLink>
+          </p>
 
-     <div className="flex justify-between mt-2">
-     <BtnCta onClick={handleOpenDonor}>Sponsor</BtnCta>
-     <BtnCta outline={true} onClick={handleOpenModal}>Register</BtnCta>
-     </div>
+          <div className="flex justify-between mt-2">
+            <BtnCta link="/sponsor">Sponsor</BtnCta>
+            <BtnCta outline={true} link="/apply">
+              Register
+            </BtnCta>
+          </div>
+        </div>
       </div>
-    </div>
-    <Modal isOpen={isOpenDonor} handleClose={handleCloseDonor}>
-      <DonorForm programId={program.id}  handleCloseModal={handleCloseDonor}/>
-    </Modal>
-    <Modal isOpen={isModalOpen} handleClose={handleCloseModal} >
-      <Form programId={program.id} handleCloseModal={handleCloseModal}/>
-    </Modal>
+      <Modal isOpen={isOpenDonor} handleClose={handleCloseDonor}>
+        <ViewMore program={program} />
+      </Modal>
+      <Modal isOpen={isModalOpen} handleClose={handleCloseModal}>
+        <Form />
+      </Modal>
     </>
   );
 };
