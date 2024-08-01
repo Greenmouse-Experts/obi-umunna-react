@@ -37,7 +37,7 @@ const Blog = () => {
         <section className="bg-[#f4f4f4] ">
           <div className="xl:w-[70%] w-full flex mx-auto flex-col  gap-x-10 justify-center items-start gap-y-5 mt-4">
           <h4>{post?.title}</h4>
-            <div className="">
+            <div className=" w-full">
               <img
                 src={post?.image}
                 alt=""
@@ -70,9 +70,13 @@ const Blog = () => {
                 )}
               </div>
               </div>
-              <div className="mt-5">
-                <p>{post?.description}</p>
-              </div>
+              <div className="mt-5"  dangerouslySetInnerHTML={{ __html: post?.description }}/>
+              {/* <div
+                className="add_list"
+                dangerouslySetInnerHTML={{ __html: specification }}
+              />
+                <p>{post?.description}</p> */}
+              
               <div className="">
               
 

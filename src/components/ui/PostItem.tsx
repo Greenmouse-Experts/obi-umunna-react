@@ -32,13 +32,19 @@ const PostItem = ({ post }: { post: BlogType }) => {
         style={{ backgroundImage: `url(${post.image})` }}
         className="p-0 h-[30rem] bg-no-repeat bg-center bg-cover rounded-md place-content-end card-shadow"
       >
-        <div className="bg-white p-5 flex flex-col gap-4 justify-end rounded-md mt-auto ">
+        <div className="bg-white p-5 flex flex-col gap-4 justify-end items-start rounded-md mt-auto sm:h-48 ">
           <p className="font-semibold">{post.title}</p>
-          <p className="text-base">{post.description.slice(0, 60)}...</p>
+          <div
+            className=""
+            dangerouslySetInnerHTML={{ __html: post?.description.slice(0, 80) }}
+          />
+          {/* <p className="text-base">{post.description.slice(0, 60)}...</p> */}
 
           <div className="flex justify-between mt-2">
             {/* <button onClick={handleOpenDonor}>Read More</button> */}
-            <BtnCta outline={true} link={`/blog/${post.id}`}>Read More</BtnCta>
+            <BtnCta outline={true} link={`/blog/${post.id}`}>
+              Read More
+            </BtnCta>
           </div>
         </div>
       </div>

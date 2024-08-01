@@ -6,7 +6,7 @@ const Excos = () => {
     <>
       <Breadcrumb
         backgroundImage="/img/excos-banner.png"
-        breadcrumbText="FAQ"
+        breadcrumbText="Excos"
       />
 
       <section className="grid xl:grid-cols-2 grid-cols-1 justify-between">

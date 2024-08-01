@@ -4,7 +4,7 @@ import Modal from "../Modal";
 import Form from "./Form";
 // import DonorForm from "./DonorForm";
 import ViewMore from "./ViewMore";
-import { NavLink } from "react-router-dom";
+// import { NavLink } from "react-router-dom";
 import { formatAsNgnMoney } from "../utils/helpers";
 
 interface ProgramType {
@@ -54,15 +54,16 @@ const ProgramItem = ({ program }: { program: ProgramType }) => {
          </div>
           <p className="text-base">
             {program.description.slice(0, 60)}...{" "}
-            <NavLink to={`/program/${program.id}`}>
+            {/* <NavLink to={`/program/${program.id}`}>
               <span className="font-semibold text-lg cursor-pointer">Read More</span>
-            </NavLink>
+            </NavLink> */}
           </p>
 
-          <div className="flex justify-between mt-2">
-            <BtnCta link="/sponsor">Sponsor</BtnCta>
+          <div className="flex flex-col justify-between gap-4 items-center mt-2">
+          <BtnCta link={`/program/${program.id}`} styles={{width:"100%", textAlign:"center", display:"block" }}>Read More</BtnCta >
+            <BtnCta link="/sponsor" styles={{width:"100%", textAlign:"center", display:"block" }}>Sponsor</BtnCta >
             
-            <BtnCta outline={true} link="/apply">
+            <BtnCta outline={true} styles={{width:"100%", textAlign:"center", display:"block" }} link="/apply">
               Register
             </BtnCta>
           </div>
