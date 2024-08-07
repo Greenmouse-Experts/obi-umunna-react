@@ -45,15 +45,22 @@ const ProgramItem = ({ program }: { program: ProgramType }) => {
     <>
       <div
         style={{ backgroundImage: `url(${program.supportBanner})` }}
-        className="p-0 h-[30rem] bg-no-repeat bg-center bg-cover rounded-md place-content-end card-shadow w-full"
+        className="p-0 h-[34rem] bg-no-repeat bg-center bg-cover rounded-md place-content-end card-shadow w-full"
       >
         <div className="bg-white p-5 flex flex-col gap-4 justify-end rounded-md mt-auto ">
          <div>
          <p className="font-semibold">{program.name}</p> 
-         <p className="font-semibold">{formatAsNgnMoney(program.budgetAmount)}</p>
+         
+         <div className="bg-gray-300 w-full rounded-3xl overflow-hidden h-[7px] mt-4">
+                <div className="bg-green-600 w-2/3 h-full rounded-3xl"></div>
+              </div>
+        <div className="flex justify-between">
+        <p className="font-semibold">{formatAsNgnMoney(program.budgetAmount)}</p>
+        <p>75%</p>
+        </div>
          </div>
           <p className="text-base">
-            {program.description.slice(0, 60)}...{" "}
+            {program.description.slice(0, 50)}...{" "}
             {/* <NavLink to={`/program/${program.id}`}>
               <span className="font-semibold text-lg cursor-pointer">Read More</span>
             </NavLink> */}
