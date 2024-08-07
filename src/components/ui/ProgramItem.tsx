@@ -60,10 +60,10 @@ const ProgramItem = ({ program }: { program: ProgramType }) => {
           </p>
 
           <div className="flex flex-col justify-between gap-4 items-center mt-2">
-          <BtnCta link={`/program/${program.id}`} styles={{width:"100%", textAlign:"center", display:"block" }}>Read More</BtnCta >
-            <BtnCta link="/sponsor" styles={{width:"100%", textAlign:"center", display:"block" }}>Sponsor</BtnCta >
+          <BtnCta link={`/program/${program.id}`} styles={{width:"100%", textAlign:"center", display:"block", }}>Read More</BtnCta >
+            <BtnCta link="/sponsor" styles={{width:"100%", textAlign:"center", display:"block", backgroundColor:'#2708A5'  }}>Sponsor</BtnCta >
             
-            <BtnCta outline={true} styles={{width:"100%", textAlign:"center", display:"block" }} link="/apply">
+            <BtnCta  styles={{width:"100%", textAlign:"center", display:"block",  backgroundColor:'#0B6F4F'  }} link="/apply">
               Register
             </BtnCta>
           </div>

@@ -25,7 +25,7 @@ const Donate = () => {
         </div>
 
         <div className="bg-[#EAE7F5] px-3 py-8 flex gap-3 rounded-[10px] relative">
-          <div className=" bg-colorPrimary rounded-md py-2 px-6 place-content-center">
+          <div className=" bg-[#2708A5] rounded-md py-2 px-6 place-content-center">
             <img src="/img/skill.png" alt="" />
           </div>
           <div>
