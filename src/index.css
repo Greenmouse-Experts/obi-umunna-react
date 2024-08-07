@@ -188,7 +188,7 @@ button{
 }
 
 .btn-green::after {
-  background-color: #A4764C;
+  background-color: inherit;
 }
 .btn-green:hover::after {
   transform: scaleX(1.4) scaleY(1.6);
