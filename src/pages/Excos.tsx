@@ -29,7 +29,7 @@ const Excos = () => {
            </div>
           </div>
         </div>
-        <div className="flex items-center md:flex-row flex-col gap-7">
+        {/* <div className="flex items-center md:flex-row flex-col gap-7">
           <img src="/img/excos-2.png" alt="" className="scale-90" />
           <div>
             <p className="text-xl font-semibold">
@@ -47,7 +47,7 @@ const Excos = () => {
             </p>
            </div>
           </div>
-        </div>
+        </div> */}
       </section>
     </>
   );
